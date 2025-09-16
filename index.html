@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GP WebDev - Desarrollo Web Profesional</title>
+    <link rel="icon" type="image/png" href="img/favicon.ico">
+    <meta name="description" content="GP Web Developer - Transformamos tu visión en sitios web modernos, funcionales y personalizados. ¡Eleva tu presencia digital con nosotros!">
+  <!-- Cargar CSS -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/templatemo-style.css">
+
+
+  <!-- Inline CSS for portfolio-specific styles -->
+  <style>
+    :root {
+      --primary-color: #993333;
+      --primary-hover: #ec4949;
+      --secondary-color: #009999;
+      --secondary-hover: #24d4d4;
+      --text-color: #666666;
+      --bg-gray: #f8f9fa;
+      --white: #ffffff;
+      --transition: all 0.3s ease;
+      --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+      font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+      font-size: clamp(16px, 2.5vw, 18px);
+      color: var(--text-color);
+      background-image: url('img/background.jpg');
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-attachment: fixed;
+      background-size: cover;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .tm-hero {
+      background-image: url('img/header.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      min-height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+    }
+
+    .tm-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    .tm-hero-content {
+      position: relative;
+      z-index: 1;
+      color: var(--white);
+    }
+
+    .tm-hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .tm-hero p {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      margin-bottom: 2rem;
+    }
+
+    /* Portfolio Grid */
+    .tm-portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 20px 0;
+    }
+
+    /* Portfolio Card */
+    .tm-portfolio-card {
+      background: var(--white);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: var(--transition);
+      max-inline-size: 360px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .tm-portfolio-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .tm-portfolio-card-image {
+      width: 100%;
+      height: 200px; /* Fixed height for uniformity */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: var(--bg-gray); /* Fallback background */
+    }
+
+    .tm-portfolio-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Ensures images fill the container without distortion */
+      object-position: center; /* Centers the image */
+      display: block;
+    }
+
+    .tm-portfolio-card-content {
+      padding: 1.5rem;
+    }
+
+    .tm-portfolio-card-title {
+      font-size: clamp(1.2rem, 2vw, 1.4rem);
+      margin-block-end: 0.5rem;
+      color: var(--primary-color);
+    }
+
+    .tm-portfolio-card a {
+      color: var(--secondary-color);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: clamp(0.9rem, 1.5vw, 1rem);
+    }
+
+    .tm-portfolio-card a:hover {
+      color: var(--secondary-hover);
+      text-decoration: underline;
+    }
+
+    /* Other styles from previous CSS */
+    .container {
+      margin-block-start: 2rem;
+      max-inline-size: 1200px;
+      margin-inline: auto;
+      padding-inline: 1rem;
+    }
+
+    .tm-section {
+      background-color: var(--white);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .tm-flex-center {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 400px;
+    }
+
+    .btn {
+      border-radius: 4px;
+      text-transform: uppercase;
+      padding: 0.75rem 2rem;
+      font-size: clamp(1rem, 1.5vw, 1.15rem);
+      transition: var(--transition);
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: var(--primary-color);
+      border-color: var(--primary-color);
+      color: var(--white);
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus {
+      background: var(--primary-hover);
+      border-color: var(--primary-hover);
+      box-shadow: var(--shadow);
+    }
+
+    .tm-text-color-primary { color: var(--primary-color); }
+    .tm-text-color-white { color: var(--white); }
+    .tm-text-color-gray { color: var(--text-color); }
+    .tm-font-thin { font-weight: 300; }
+    .tm-max-w-400 { max-inline-size: 400px; }
+
+    .tm-logo-img {
+      max-width: 150px;
+      max-height: 150px;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    /* WhatsApp Floating Button */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+
+    .whatsapp-float a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 60px;
+      height: 60px;
+      background-color: #25D366;
+      border-radius: 50%;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: var(--transition);
+    }
+
+    .whatsapp-float a:hover {
+      background-color: #20b358;
+      transform: scale(1.1);
+    }
+
+    .whatsapp-float img {
+      width: 32px;
+      height: 32px;
+    }
+
+    @media (max-width: 600px) {
+      .tm-portfolio-card {
+        max-inline-size: 100%;
+        margin: 0.5rem;
+      }
+
+      .whatsapp-float {
+        bottom: 15px;
+        right: 15px;
+      }
+
+      .whatsapp-float a {
+        width: 50px;
+        height: 50px;
+      }
+
+      .whatsapp-float img {
+        width: 28px;
+        height: 28px;
+      }
+    }
+  </style>
+
+  <script>
+    var renderPage = true;
+    if (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0) {
+      alert("Por favor, visualiza esta página en un navegador moderno como Chrome o Microsoft Edge.");
+      renderPage = false;
+    }
+  </script>
+</head>
+
+<body>
+  <!-- Loader -->
+  <div id="loader-wrapper">
+    <div id="loader"></div>
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="tm-hero">
+    <div class="tm-hero-content">
+      <h1>GP Web Developer</h1>
+      <p>Transformamos tu visión en sitios web modernos, funcionales y personalizados. ¡Eleva tu presencia digital con nosotros!</p>
+      <a href="https://www.instagram.com/gp_webdev/" class="btn btn-primary" target="_blank">Visita nuestro Instagram</a>
+    </div>
+  </section>
+
+  <div class="container">
+
+    <!-- 1ra Sección -->
+    <section class="row tm-section">
+      <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 p-0">
+        <div class="tm-flex-center p-5 tm-bg-color-primary tm-section-min-h">
+          <h1 class="tm-text-color-white tm-site-name">Desarrollo Web</h1>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+        <div class="tm-flex-center p-5">
+          <q class="tm-quote tm-text-color-gray">Creamos experiencias digitales únicas. 
+            <br>
+            Tu visión, nuestro código.</q>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2da Sección -->
+    <section class="row tm-section tm-col-md-reverse">
+      <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+        <div class="tm-flex-center p-5">
+          <div class="tm-md-flex-center">
+            <h2 class="tm-text-color-primary mb-4">Soluciones Web Personalizadas</h2>
+            <p class="mb-4">Desarrollamos sitios web a medida que potencian tu marca. Desde diseños modernos hasta funcionalidades avanzadas, te ayudamos a destacar en el mundo digital.</p>
+            <a href="https://www.instagram.com/gp_webdev/" class="btn btn-primary float-lg-right tm-md-align-center" target="_blank">Conoce más</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 p-0">
+        <div class="tm-flex-center p-5 tm-bg-color-primary">
+          <div class="tm-max-w-400 tm-flex-center tm-flex-col">
+            <!-- Logo con animaciones -->
+            <div class="tm-logo-wrap">
+              <div class="tm-logo-glow"></div>
+              <img id="site-logo" src="img/logo.png" alt="Imagen" class="tm-logo-img rounded-circle mb-4">
+              <div class="tm-logo-shine"></div>
+            </div>
+            <p class="tm-text-color-white small tm-font-thin mb-0">
+              Nuestro equipo está comprometido en ofrecer soluciones digitales innovadoras que impulsen tu negocio.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3ra Sección -->
+    <section class="row tm-section tm-mb-30">
+      <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 p-0 text-center">
+        <img src="img/diseño.png" alt="Imagen" class="img-fluid">
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+        <div class="tm-flex-center p-5">
+          <div class="tm-flex-center tm-flex-col">
+            <h2 class="tm-align-left">Diseño y Desarrollo Web</h2>
+            <p>Ofrecemos servicios completos de diseño y desarrollo web. Cuéntanos tu idea y la haremos realidad. Síguenos en <a href="https://www.instagram.com/gp_webdev/" target="_blank">Instagram</a> para más información.</p>
+            <a href="https://www.instagram.com/gp_webdev/" class="btn btn-primary" target="_blank">Conoce más</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4ta Sección -->
+    <section class="row tm-section tm-mb-30 flex flex-wrap items-center">
+      <!-- Columna de texto -->
+      <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8">
+        <div class="tm-flex-center pl-5 pr-5 pt-5 pb-5">
+          <div class="tm-md-flex-center">
+            <h2 class="mb-6 tm-text-color-primary text-3xl font-bold">Soluciones Digitales Completas</h2>
+            <p class="mb-4 text-lg">Transformamos tus ideas en sitios web a medida que <span class="text-purple-500 font-semibold">destacan tu marca</span> y <span class="text-purple-500 font-semibold">conectan con tus clientes</span>. Ofrecemos:</p>
+            <ul class="mb-4 space-y-3">
+              <li class="flex items-center">
+                <i class="fas fa-user text-green-500 mr-3"></i>
+                <span class="text-green-500 font-semibold underline decoration-green-300 decoration-2">Portfolios personales</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-building text-green-500 mr-3"></i>
+                <span class="text-green-500 font-semibold underline decoration-green-300 decoration-2">Sitios corporativos</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-shopping-cart text-green-500 mr-3"></i>
+                <span class="text-green-500 font-semibold underline decoration-green-300 decoration-2">Tiendas en línea</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-bullhorn text-green-500 mr-3"></i>
+                <span class="text-green-500 font-semibold underline decoration-green-300 decoration-2">Landing pages</span>
+              </li>
+            </ul>
+            <p class="mb-4 text-lg">Nuestros sitios son <span class="text-blue-500 font-semibold">100% responsivos</span>, optimizados para <span class="text-blue-500 font-semibold">SEO</span> y con <span class="text-blue-500 font-semibold">mantenimiento continuo</span>.</p>
+            <p class="mb-4 text-lg">Cada proyecto es una oportunidad para <span class="text-red-500 font-semibold">innovar</span>, <span class="text-red-500 font-semibold">destacar</span> y <span class="text-red-500 font-semibold">crecer</span>.</p>
+            <a href="https://www.instagram.com/gp_webdev/" class="btn btn-primary mt-3" target="_blank">Conoce más</a>
+          </div>
+        </div>
+      </div>
+      <!-- Columna de imagen -->
+      <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 flex justify-center items-center">
+        <img src="img/3D1.png" alt="Imagen" class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-500 max-w-full h-auto animate-float">
+      </div>
+    </section>
+
+    <!-- 5ta Sección - Portafolio -->
+    <section class="row tm-section tm-mb-30">
+      <div class="col-12">
+        <br>
+        <h2 class="tm-text-color-primary text-center mb-4">Nuestro Portafolio</h2>
+        <div class="tm-portfolio-grid">
+          <div class="tm-portfolio-card">
+            <div class="tm-portfolio-card-image">
+              <img src="img/bar.png" alt="Bar 1985">
+            </div>
+            <div class="tm-portfolio-card-content">
+              <h3 class="tm-portfolio-card-title">Bar Cocteleria</h3>
+              <a href="https://bar1985.vercel.app/" target="_blank">Visitar sitio</a>
+            </div>
+          </div>
+          <div class="tm-portfolio-card">
+            <div class="tm-portfolio-card-image">
+              <img src="img/carga.gif" alt="Proyecto xxx">
+            </div>
+            <div class="tm-portfolio-card-content">
+              <h3 class="tm-portfolio-card-title">En Proceso</h3>
+              <a href="" target="_blank">Visitar sitio</a>
+            </div>
+          </div>
+          <div class="tm-portfolio-card">
+            <div class="tm-portfolio-card-image">
+              <img src="img/barber.png" alt="Barber Shop">
+            </div>
+            <div class="tm-portfolio-card-content">
+              <h3 class="tm-portfolio-card-title">Barber Studio</h3>
+              <a href="https://barber-shop-omega-two.vercel.app/" target="_blank">Visitar sitio</a>
+            </div>
+          </div>
+          <div class="tm-portfolio-card">
+            <div class="tm-portfolio-card-image">
+              <img src="img/studio.png" alt="Studio">
+            </div>
+            <div class="tm-portfolio-card-content">
+              <h3 class="tm-portfolio-card-title">Studio INK</h3>
+              <a href="https://studio-mauve-eight-58.vercel.app/" target="_blank">Visitar sitio</a>
+            </div>
+          </div>
+          <div class="tm-portfolio-card">
+            <div class="tm-portfolio-card-image">
+              <img src="img/coffe.png" alt="Coffelp">
+            </div>
+            <div class="tm-portfolio-card-content">
+              <h3 class="tm-portfolio-card-title">Cafeteria Lp</h3>
+              <a href="https://coffelp.vercel.app/" target="_blank">Visitar sitio</a>
+            </div>
+          </div>
+          <div class="tm-portfolio-card">
+            <div class="tm-portfolio-card-image">
+              <img src="img/design.png" alt="Design">
+            </div>
+            <div class="tm-portfolio-card-content">
+              <h3 class="tm-portfolio-card-title">Diseño y Decoración</h3>
+              <a href="https://design-coral-six.vercel.app/" target="_blank">Visitar sitio</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6ta Sección -->
+    <section class="row">
+      <div class="col-lg-12 tm-form-header pl-5 pr-5">
+        <h2 class="tm-container-inner tm-text-color-white">Formulario de Contacto</h2>
+      </div>
+      <div class="col-lg-12 pl-2 pl-sm-3 pl-md-5 pr-2 pr-sm-3 pr-md-5">
+        <form action="https://formspree.io/f/mpwjgpzv" method="POST" class="row tm-container-inner tm-contact-form">
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+            <div class="form-group">
+              <input type="text" id="contact_name" name="contact_name" class="form-control" placeholder="Nombre Completo" required/>
+            </div>
+            <div class="form-group">
+              <input type="email" id="contact_email" name="contact_email" class="form-control" placeholder="Tu Correo Electrónico" required/>
+            </div>
+            <div class="form-group">
+              <select name="project_type">
+                <option value="website">Portfolio Personal</option>
+                <option value="website">Sitio Web Corporativo</option>
+                <option value="ecommerce">Tienda en Línea</option>
+                <option value="landing">Landing Page</option>
+                <option value="custom">Proyecto Personalizado</option>
+                <option value="website">Otro</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <select name="budget">
+                <option value="">Presupuesto</option>
+                <option value="100">$100 - $500</option>
+                <option value="500">$500 - $1000</option>
+                <option value="1000">$1000 - $2000</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+            <div class="form-group">
+              <textarea id="contact_message" name="contact_message" class="form-control" rows="6" placeholder="Mensaje Adicional" required></textarea>
+            </div>
+          </div>
+          <div class="col-xs-12 mt-4 tm-center">
+            <button type="submit" class="btn btn-primary">Enviar</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <div class="col-lg-12 tm-bg-color-primary tm-form-footer">
+      <div class="row tm-container-inner">
+        <!-- Contacto -->
+        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+          <div class="tm-footer-info-box">
+            <h4 style="color: var(--white); margin-bottom: 1rem;">Contáctanos</h4>
+            <address style="color: var(--white); font-style: normal; line-height: 1.8;">
+              📍 Las Parejas, Santa Fe<br>
+              📞 <a href="tel:+5493471417071" style="color: var(--white); text-decoration: none;">+54 9 3471 417071</a><br>
+              ✉️ <a href="mailto:gp.webdev2@gmail.com" style="color: var(--white); text-decoration: none;">gp.webdev2@gmail.com</a>
+            </address>
+          </div>
+        </div>
+        <!-- Redes Sociales -->
+        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+          <div class="tm-footer-info-box">
+            <h4 style="color: var(--white); margin-bottom: 1rem;">¡Nuestras redes!</h4>
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <a href="https://www.instagram.com/gp_webdev/" target="_blank" 
+                 style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--white);">
+                <img src="img/insta.png" alt="Instagram" style="width: 28px; height: 28px; border-radius: 6px;">
+                <span>@gp_webdev</span>
+              </a>
+              <a href="https://wa.me/5493471417071" target="_blank" 
+                 style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--white);">
+                <img src="img/wpp.png" alt="WhatsApp" style="width: 28px; height: 28px; border-radius: 6px;">
+                <span>Escríbenos por WhatsApp</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WhatsApp Floating Button -->
+    <div class="whatsapp-float">
+      <a href="https://wa.me/5493471417071?text=Hola%20GP%20WebDev,%20quiero%20consultar%20sobre%20sus%20servicios%20de%20desarrollo%20web" target="_blank">
+        <img src="img/botonwpp.png" alt="WhatsApp">
+      </a>
+    </div>
+
+    <!-- Pie de página -->
+    <div class="row">
+      <div class="col-lg-12">
+        <p class="text-center small tm-copyright-text mb-0"> &copy; Copyright <span class="tm-current-year"></span> | Diseñado por <a href="https://www.instagram.com/gp_webdev/" class="tm-text-color-gray" target="_blank">GP WebDev</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cargar JS -->
+  <script src="js/jquery-3.2.1.slim.min.js"></script>
+  <script>
+    $(function(){
+      if(renderPage) {
+        $('body').addClass('loaded');
+      }
+      $('.tm-current-year').text(new Date().getFullYear());
+    });
+  </script>
+</body>
+</html>
