@@ -4,663 +4,639 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>GPWebDev - Desarrollo Web</title>
-    <link rel="icon" type="image/png" href="img/favicon.ico">
-    <meta name="description" content="GP Web Developer - Transformamos tu visión en sitios web modernos, funcionales y personalizados. ¡Eleva tu presencia digital conmigo!">
-  <!-- Cargar CSS -->
+  
+  <!-- Meta tags -->
+  <meta name="description" content="GP Web Developer - Transformamos tu visión en sitios web modernos, funcionales y personalizados. ¡Eleva tu presencia digital conmigo!">
+  <link rel="icon" type="image/png" href="img/favicon.ico">
+
+  <!-- CSS Externo -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/templatemo-style.css">
 
-  <!-- Inline CSS for portfolio-specific styles -->
+  <!-- CSS Inline -->
   <style>
-  :root {
-    --primary-color: #993333;
-    --primary-hover: #ec4949;
-    --secondary-color: #009999;
-    --secondary-hover: #24d4d4;
-    --text-color: #666666;
-    --bg-gray: #f8f9fa;
-    --white: #ffffff;
-    --transition: all 0.3s ease;
-    --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-
-  body {
-    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-    font-size: clamp(16px, 2.5vw, 18px);
-    color: var(--text-color);
-    background-image: url('img/background.jpg');
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-attachment: fixed;
-    background-size: cover;
-    line-height: 1.6;
-    margin: 0;
-  }
-
-  .tm-hero {
-    background-image: url('img/header.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    min-height: 100vh; /* Altura completa de la ventana */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .tm-hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      135deg,
-      rgba(0, 0, 0, 0.7) 0%,
-      rgba(0, 0, 0, 0.5) 50%,
-      rgba(0, 0, 0, 0.8) 100%
-    );
-    z-index: 1;
-  }
-
-  .tm-hero-content {
-    position: relative;
-    z-index: 2;
-    color: var(--white);
-    max-width: 800px;
-    padding: 2rem;
-    animation: fadeInUp 1s ease-out;
-  }
-
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .tm-hero h1 {
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-    line-height: 1.2;
-    
-    /* Título en blanco con sombra mejorada para legibilidad */
-    color: var(--white);
-    text-shadow: 
-      2px 2px 4px rgba(0, 0, 0, 0.8),
-      0 0 20px rgba(0, 0, 0, 0.3),
-      0 0 40px rgba(0, 0, 0, 0.2);
-    
-    /* Alternativa comentada: efecto de gradiente */
-    /*
-    background: linear-gradient(135deg, 
-      rgba(153, 51, 51, 0.9) 0%, 
-      rgba(236, 73, 73, 0.9) 100%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    */
-    
-    position: relative;
-    overflow: hidden;
-  }
-
-  .tm-hero h1::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 3px;
-    background: linear-gradient(90deg, 
-      transparent 0%, 
-      var(--secondary-color) 50%, 
-      transparent 100%);
-    border-radius: 2px;
-  }
-
-  .tm-hero p {
-    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
-    margin-bottom: 2.5rem;
-    line-height: 1.6;
-    opacity: 0.95;
-    
-    /* Fondo sutil para el párrafo */
-    background: rgba(0, 0, 0, 0.4);
-    padding: 1rem 1.5rem;
-    border-radius: 15px;
-    border-left: 4px solid var(--secondary-color);
-    display: inline-block;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-    
-    /* Sombra de texto para mejor legibilidad */
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
-  }
-
-  /* Botón principal del hero mejorado */
-  .tm-hero .btn-primary {
-    display: inline-block;
-    background: linear-gradient(135deg, 
-      var(--primary-color) 0%, 
-      var(--primary-hover) 100%);
-    border: none;
-    color: var(--white);
-    padding: 1rem 2.5rem;
-    font-size: clamp(1rem, 1.8vw, 1.2rem);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    border-radius: 50px;
-    transition: var(--transition);
-    box-shadow: 
-      0 8px 25px rgba(153, 51, 51, 0.3),
-      0 4px 15px rgba(0, 0, 0, 0.2);
-    position: relative;
-    overflow: hidden;
-    text-decoration: none;
-  }
-
-  .tm-hero .btn-primary::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, 
-      transparent, 
-      rgba(255, 255, 255, 0.2), 
-      transparent);
-    transition: left 0.5s;
-  }
-
-  .tm-hero .btn-primary:hover::before {
-    left: 100%;
-  }
-
-  .tm-hero .btn-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 
-      0 12px 35px rgba(153, 51, 51, 0.4),
-      0 6px 20px rgba(0, 0, 0, 0.3);
-    background: linear-gradient(135deg, 
-      var(--primary-hover) 0%, 
-      #ff6b6b 100%);
-  }
-
-  /* Partículas decorativas */
-  .tm-hero::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: 
-      radial-gradient(2px 2px at 20px 30px, rgba(255, 255, 255, 0.3), transparent),
-      radial-gradient(2px 2px at 40px 70px, rgba(255, 255, 255, 0.2), transparent),
-      radial-gradient(1px 1px at 90px 40px, rgba(255, 255, 255, 0.4), transparent),
-      radial-gradient(1px 1px at 130px 80px, rgba(255, 255, 255, 0.3), transparent),
-      radial-gradient(2px 2px at 160px 30px, rgba(255, 255, 255, 0.2), transparent);
-    background-repeat: repeat;
-    background-size: 200px 100px;
-    animation: sparkle 20s linear infinite;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  @keyframes sparkle {
-    from { transform: translateY(0px); }
-    to { transform: translateY(-100px); }
-  }
-
-  /* Portfolio Grid */
-  .tm-portfolio-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    padding: 20px 0;
-  }
-
-  /* Portfolio Card */
-  .tm-portfolio-card {
-    background: var(--white);
-    border-radius: 8px;
-    box-shadow: var(--shadow);
-    overflow: hidden;
-    transition: var(--transition);
-    max-inline-size: 360px;
-    margin: 0 auto;
-    text-align: center;
-  }
-
-  .tm-portfolio-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-  }
-
-  .tm-portfolio-card-image {
-    width: 100%;
-    height: 200px; /* Fixed height for uniformity */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    background: var(--bg-gray); /* Fallback background */
-  }
-
-  .tm-portfolio-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensures images fill the container without distortion */
-    object-position: center; /* Centers the image */
-    display: block;
-  }
-
-  .tm-portfolio-card-content {
-    padding: 1.5rem;
-  }
-
-  .tm-portfolio-card-title {
-    font-size: clamp(1.2rem, 2vw, 1.4rem);
-    margin-block-end: 0.5rem;
-    color: var(--primary-color);
-  }
-
-  .tm-portfolio-card a {
-    color: var(--secondary-color);
-    text-decoration: none;
-    font-weight: 500;
-    font-size: clamp(0.9rem, 1.5vw, 1rem);
-  }
-
-  .tm-portfolio-card a:hover {
-    color: var(--secondary-hover);
-    text-decoration: underline;
-  }
-
-  /* Other styles from previous CSS */
-  .container {
-    margin-block-start: 2rem;
-    max-inline-size: 1200px;
-    margin-inline: auto;
-    padding-inline: 1rem;
-  }
-
-  .tm-section {
-    background-color: var(--white);
-    border-radius: 8px;
-    box-shadow: var(--shadow);
-  }
-
-  .tm-flex-center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    min-height: 400px;
-  }
-
-  .btn {
-    border-radius: 4px;
-    text-transform: uppercase;
-    padding: 0.75rem 2rem;
-    font-size: clamp(1rem, 1.5vw, 1.15rem);
-    transition: var(--transition);
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-  }
-
-  .btn-primary {
-    background: var(--primary-color);
-    border-color: var(--primary-color);
-    color: var(--white);
-  }
-
-  .btn-primary:hover,
-  .btn-primary:focus {
-    background: var(--primary-hover);
-    border-color: var(--primary-hover);
-    box-shadow: var(--shadow);
-  }
-
-  .tm-text-color-primary { color: var(--primary-color); }
-  .tm-text-color-white { color: var(--white); }
-  .tm-text-color-gray { color: var(--text-color); }
-  .tm-font-thin { font-weight: 300; }
-  .tm-max-w-400 { max-inline-size: 400px; }
-
-  .tm-logo-img {
-    max-width: 150px;
-    max-height: 150px;
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    border-radius: 50%;
-  }
-
-  /* WhatsApp Floating Button */
-  .whatsapp-float {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000;
-  }
-
-  .whatsapp-float a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 60px;
-    height: 60px;
-    background-color: #25D366;
-    border-radius: 50%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: var(--transition);
-  }
-
-  .whatsapp-float a:hover {
-    background-color: #20b358;
-    transform: scale(1.1);
-  }
-
-  .whatsapp-float img {
-    width: 32px;
-    height: 32px;
-  }
-
-  /* Centered form title */
-  .tm-form-header {
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-
-  .tm-form-header h2 {
-    margin: 0;
-    font-size: clamp(1.8rem, 3vw, 2.2rem);
-    font-weight: 600;
-
-    /* Título del formulario visible sobre fondo transparente */
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0), rgba(248, 249, 250, 0));
-    color: #ffffff;
-    padding: 0.5rem 2rem;
-    border-radius: 8px;
-    display: inline-block;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0);
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-  }
-
-  /* Formulario con background transparente */
-  .tm-form-section {
-    background: transparent !important;
-    box-shadow: none !important;
-    margin: 0 !important;
-  }
-
-  /* Labels del formulario en blanco */
-  .tm-form-section label {
-    color: #ffffff !important;
-    font-weight: 500;
-    margin-bottom: 0.5rem;
-    display: block;
-  }
-
-  /* Inputs del formulario */
-  .tm-form-section .form-control {
-    background-color: rgba(0, 0, 0, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: #ffffff !important;
-    padding: 0.75rem;
-    border-radius: 4px;
-    margin-bottom: 1rem;
-    width: 100%;
-  }
-
-  .tm-form-section .form-control::placeholder {
-    color: rgba(255, 255, 255, 0.7) !important;
-  }
-
-  .tm-form-section .form-control:focus {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.5);
-    color: #ffffff !important;
-    box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.2);
-    outline: none;
-  }
-
-  /* Selects del formulario */
-  .tm-form-section select {
-    background-color: rgba(0, 0, 0, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: #ffffff !important;
-    padding: 0.75rem;
-    border-radius: 4px;
-    margin-bottom: 1rem;
-    width: 100%;
-    font-size: inherit;
-    cursor: pointer;
-  }
-
-  .tm-form-section select option {
-    background-color: #ffffff;
-    color: #333333;
-    padding: 0.25rem;
-  }
-
-  .tm-form-section select:focus {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.5);
-    color: #ffffff !important;
-    outline: none;
-    box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.2);
-  }
-
-  /* Para navegadores específicos */
-  .tm-form-section select::-ms-expand {
-    color: #ffffff;
-    background-color: rgba(0, 0, 0, 0.6);
-  }
-
-  .tm-form-section select::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  .tm-form-section select::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.3);
-  }
-
-  .tm-form-section select::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 4px;
-  }
-
-  /* Botón del formulario - ACHICADO */
-  .tm-form-section .btn {
-    background: var(--primary-color);
-    border-color: var(--primary-color);
-    color: var(--white);
-    padding: 0.5rem 1.5rem; /* Reducido de 0.75rem 2rem */
-    border-radius: 4px;
-    font-size: 0.9rem; /* Reducido de 1rem */
-    transition: var(--transition);
-    cursor: pointer;
-    width: 100%;
-    margin-top: 1rem;
-  }
-
-  .tm-form-section .btn:hover {
-    background: var(--primary-hover);
-    border-color: var(--primary-hover);
-    color: var(--white);
-    transform: translateY(-2px);
-  }
-
-  /* Footer con efecto de superposición */
-  .tm-footer-section {
-    background-color: var(--primary-color) !important;
-    color: var(--white);
-    padding: 2rem 0;
-    margin-top: -2rem; /* Lo sube más arriba */
-    position: relative;
-    z-index: 2;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-    margin-bottom: 2rem;
-  }
-
-  .tm-footer-info-box {
-    margin-bottom: 1rem;
-  }
-
-  .tm-footer-info-box h4 {
-    margin-bottom: 1rem;
-    color: var(--white);
-  }
-
-  .tm-footer-info-box address {
-    color: var(--white);
-    font-style: normal;
-    line-height: 1.8;
-  }
-
-  .tm-footer-info-box a {
-    color: var(--white);
-    text-decoration: none;
-  }
-
-  .tm-footer-info-box a:hover {
-    text-decoration: underline;
-  }
-
-  .tm-social-links {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .tm-social-links a {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-    color: var(--white);
-  }
-
-  .tm-social-links img {
-    width: 28px;
-    height: 28px;
-    border-radius: 6px;
-  }
-
-  /* Copyright in white */
-  .tm-copyright-text {
-    color: var(--white) !important;
-  }
-
-  .tm-copyright-text a {
-    color: var(--white) !important;
-    text-decoration: none;
-  }
-
-  .tm-copyright-text a:hover {
-    text-decoration: underline;
-  }
-
-  @media (max-width: 600px) {
-    .tm-portfolio-card {
-      max-inline-size: 100%;
-      margin: 0.5rem;
+    :root {
+      --primary-color: #993333;
+      --primary-hover: #ec4949;
+      --secondary-color: #009999;
+      --secondary-hover: #24d4d4;
+      --text-color: #666666;
+      --bg-gray: #f8f9fa;
+      --white: #ffffff;
+      --transition: all 0.3s ease;
+      --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
-    .whatsapp-float {
-      bottom: 15px;
-      right: 15px;
+    /* Body y tipografía base */
+    body {
+      font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+      font-size: clamp(16px, 2.5vw, 18px);
+      color: var(--text-color);
+      background-image: url('img/background.jpg');
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-attachment: fixed;
+      background-size: cover;
+      line-height: 1.6;
+      margin: 0;
     }
 
-    .whatsapp-float a {
-      width: 50px;
-      height: 50px;
+    html {
+      scroll-behavior: smooth;
     }
 
-    .whatsapp-float img {
-      width: 28px;
-      height: 28px;
-    }
-
-    .tm-footer-section {
-      margin-top: -1rem;
-      padding: 1.5rem 0;
-    }
-
-    .tm-form-header h2 {
-      padding: 0.4rem 1.5rem;
-      font-size: clamp(1.5rem, 4vw, 1.8rem);
-    }
-
-    .tm-form-section .form-control,
-    .tm-form-section select {
-      font-size: 16px; /* Evita zoom en iOS */
-    }
-
+    /* Hero Section */
     .tm-hero {
+      background-image: url('img/header.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
       min-height: 100vh;
-      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tm-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        135deg,
+        rgba(0, 0, 0, 0.7) 0%,
+        rgba(0, 0, 0, 0.5) 50%,
+        rgba(0, 0, 0, 0.8) 100%
+      );
+      z-index: 1;
+    }
+
+    .tm-hero::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(2px 2px at 20px 30px, rgba(255, 255, 255, 0.3), transparent),
+        radial-gradient(2px 2px at 40px 70px, rgba(255, 255, 255, 0.2), transparent),
+        radial-gradient(1px 1px at 90px 40px, rgba(255, 255, 255, 0.4), transparent),
+        radial-gradient(1px 1px at 130px 80px, rgba(255, 255, 255, 0.3), transparent),
+        radial-gradient(2px 2px at 160px 30px, rgba(255, 255, 255, 0.2), transparent);
+      background-repeat: repeat;
+      background-size: 200px 100px;
+      animation: sparkle 20s linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes sparkle {
+      from { transform: translateY(0px); }
+      to { transform: translateY(-100px); }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .tm-hero-content {
+      position: relative;
+      z-index: 2;
+      color: var(--white);
+      max-width: 800px;
+      padding: 2rem;
+      animation: fadeInUp 1s ease-out;
     }
 
     .tm-hero h1 {
-      font-size: clamp(2rem, 8vw, 3rem);
-      padding: 0.8rem 1.5rem;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+      color: var(--white);
+      text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.8),
+        0 0 20px rgba(0, 0, 0, 0.3),
+        0 0 40px rgba(0, 0, 0, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tm-hero h1::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, 
+        transparent 0%, 
+        var(--secondary-color) 50%, 
+        transparent 100%);
+      border-radius: 2px;
     }
 
     .tm-hero p {
-      font-size: clamp(1rem, 4vw, 1.2rem);
-      padding: 0.8rem 1rem;
+      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+      margin-bottom: 2.5rem;
+      line-height: 1.6;
+      opacity: 0.95;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 1rem 1.5rem;
+      border-radius: 15px;
+      border-left: 4px solid var(--secondary-color);
+      display: inline-block;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
     }
 
     .tm-hero .btn-primary {
-      padding: 0.8rem 2rem;
-      font-size: clamp(0.9rem, 2vw, 1rem);
+      display: inline-block;
+      background: linear-gradient(135deg, 
+        var(--primary-color) 0%, 
+        var(--primary-hover) 100%);
+      border: none;
+      color: var(--white);
+      padding: 1rem 2.5rem;
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-radius: 50px;
+      transition: var(--transition);
+      box-shadow: 
+        0 8px 25px rgba(153, 51, 51, 0.3),
+        0 4px 15px rgba(0, 0, 0, 0.2);
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
     }
 
-    /* Botón del formulario más pequeño en móvil */
+    .tm-hero .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.2), 
+        transparent);
+      transition: left 0.5s;
+    }
+
+    .tm-hero .btn-primary:hover::before {
+      left: 100%;
+    }
+
+    .tm-hero .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 
+        0 12px 35px rgba(153, 51, 51, 0.4),
+        0 6px 20px rgba(0, 0, 0, 0.3);
+      background: linear-gradient(135deg, 
+        var(--primary-hover) 0%, 
+        #ff6b6b 100%);
+    }
+
+    /* Layout y contenedor */
+    .container {
+      margin-block-start: 2rem;
+      max-inline-size: 1200px;
+      margin-inline: auto;
+      padding-inline: 1rem;
+    }
+
+    .tm-section {
+      background-color: var(--white);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .tm-flex-center {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 400px;
+    }
+
+    /* Portfolio */
+    .tm-portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 20px 0;
+    }
+
+    .tm-portfolio-card {
+      background: var(--white);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: var(--transition);
+      max-inline-size: 360px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .tm-portfolio-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .tm-portfolio-card-image {
+      width: 100%;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: var(--bg-gray);
+    }
+
+    .tm-portfolio-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .tm-portfolio-card-content {
+      padding: 1.5rem;
+    }
+
+    .tm-portfolio-card-title {
+      font-size: clamp(1.2rem, 2vw, 1.4rem);
+      margin-block-end: 0.5rem;
+      color: var(--primary-color);
+    }
+
+    .tm-portfolio-card a {
+      color: var(--secondary-color);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: clamp(0.9rem, 1.5vw, 1rem);
+    }
+
+    .tm-portfolio-card a:hover {
+      color: var(--secondary-hover);
+      text-decoration: underline;
+    }
+
+    /* Botones generales */
+    .btn {
+      border-radius: 4px;
+      text-transform: uppercase;
+      padding: 0.75rem 2rem;
+      font-size: clamp(1rem, 1.5vw, 1.15rem);
+      transition: var(--transition);
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: var(--primary-color);
+      border-color: var(--primary-color);
+      color: var(--white);
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus {
+      background: var(--primary-hover);
+      border-color: var(--primary-hover);
+      box-shadow: var(--shadow);
+    }
+
+    /* Utilidades */
+    .tm-text-color-primary { color: var(--primary-color); }
+    .tm-text-color-white { color: var(--white); }
+    .tm-text-color-gray { color: var(--text-color); }
+    .tm-font-thin { font-weight: 300; }
+    .tm-max-w-400 { max-inline-size: 400px; }
+
+    .tm-logo-img {
+      max-width: 150px;
+      max-height: 150px;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    /* WhatsApp Float */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+
+    .whatsapp-float a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 60px;
+      height: 60px;
+      background-color: #25D366;
+      border-radius: 50%;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: var(--transition);
+    }
+
+    .whatsapp-float a:hover {
+      background-color: #20b358;
+      transform: scale(1.1);
+    }
+
+    .whatsapp-float img {
+      width: 32px;
+      height: 32px;
+    }
+
+    /* Formulario */
+    .tm-form-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .tm-form-header h2 {
+      margin: 0;
+      font-size: clamp(1.8rem, 3vw, 2.2rem);
+      font-weight: 600;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0), rgba(248, 249, 250, 0));
+      color: #ffffff;
+      padding: 0.5rem 2rem;
+      border-radius: 8px;
+      display: inline-block;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0);
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .tm-form-section {
+      background: transparent !important;
+      box-shadow: none !important;
+      margin: 0 !important;
+    }
+
+    .tm-form-section label {
+      color: #ffffff !important;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .tm-form-section .form-control {
+      background-color: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #ffffff !important;
+      padding: 0.75rem;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+      width: 100%;
+    }
+
+    .tm-form-section .form-control::placeholder {
+      color: rgba(255, 255, 255, 0.7) !important;
+    }
+
+    .tm-form-section .form-control:focus {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.5);
+      color: #ffffff !important;
+      box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.2);
+      outline: none;
+    }
+
+    .tm-form-section select {
+      background-color: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #ffffff !important;
+      padding: 0.75rem;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+      width: 100%;
+      font-size: inherit;
+      cursor: pointer;
+    }
+
+    .tm-form-section select option {
+      background-color: #ffffff;
+      color: #333333;
+      padding: 0.25rem;
+    }
+
+    .tm-form-section select:focus {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.5);
+      color: #ffffff !important;
+      outline: none;
+      box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.2);
+    }
+
+    .tm-form-section select::-ms-expand {
+      color: #ffffff;
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    .tm-form-section select::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .tm-form-section select::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    .tm-form-section select::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 4px;
+    }
+
     .tm-form-section .btn {
-      padding: 0.4rem 1.2rem;
-      font-size: 0.85rem;
+      background: var(--primary-color);
+      border-color: var(--primary-color);
+      color: var(--white);
+      padding: 0.5rem 1.5rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      transition: var(--transition);
+      cursor: pointer;
+      width: 100%;
+      margin-top: 1rem;
     }
-  }
 
-  /* Mejora adicional para pantallas medianas */
-  @media (min-width: 601px) and (max-width: 768px) {
-    .tm-hero h1 {
-      font-size: clamp(2.2rem, 5vw, 3.5rem);
+    .tm-form-section .btn:hover {
+      background: var(--primary-hover);
+      border-color: var(--primary-hover);
+      color: var(--white);
+      transform: translateY(-2px);
     }
-    
-    .tm-hero p {
-      font-size: clamp(1.1rem, 2.2vw, 1.3rem);
+
+    /* Footer */
+    .tm-footer-section {
+      background-color: var(--primary-color) !important;
+      color: var(--white);
+      padding: 2rem 0;
+      margin-top: -2rem;
+      position: relative;
+      z-index: 2;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      margin-bottom: 2rem;
     }
-  }
 
-  /* Smooth scroll para navegación interna */
-  html {
-    scroll-behavior: smooth;
-  }
-</style>
+    .tm-footer-info-box {
+      margin-bottom: 1rem;
+    }
 
+    .tm-footer-info-box h4 {
+      margin-bottom: 1rem;
+      color: var(--white);
+    }
 
+    .tm-footer-info-box address {
+      color: var(--white);
+      font-style: normal;
+      line-height: 1.8;
+    }
+
+    .tm-footer-info-box a {
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .tm-footer-info-box a:hover {
+      text-decoration: underline;
+    }
+
+    .tm-social-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .tm-social-links a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--white);
+    }
+
+    .tm-social-links img {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+    }
+
+    .tm-copyright-text {
+      color: var(--white) !important;
+    }
+
+    .tm-copyright-text a {
+      color: var(--white) !important;
+      text-decoration: none;
+    }
+
+    .tm-copyright-text a:hover {
+      text-decoration: underline;
+    }
+
+    /* Media Queries */
+    @media (max-width: 600px) {
+      .tm-portfolio-card {
+        max-inline-size: 100%;
+        margin: 0.5rem;
+      }
+
+      .whatsapp-float {
+        bottom: 15px;
+        right: 15px;
+      }
+
+      .whatsapp-float a {
+        width: 50px;
+        height: 50px;
+      }
+
+      .whatsapp-float img {
+        width: 28px;
+        height: 28px;
+      }
+
+      .tm-footer-section {
+        margin-top: -1rem;
+        padding: 1.5rem 0;
+      }
+
+      .tm-form-header h2 {
+        padding: 0.4rem 1.5rem;
+        font-size: clamp(1.5rem, 4vw, 1.8rem);
+      }
+
+      .tm-form-section .form-control,
+      .tm-form-section select {
+        font-size: 16px;
+      }
+
+      .tm-hero {
+        min-height: 100vh;
+        padding: 1rem;
+      }
+
+      .tm-hero h1 {
+        font-size: clamp(2rem, 8vw, 3rem);
+        padding: 0.8rem 1.5rem;
+      }
+
+      .tm-hero p {
+        font-size: clamp(1rem, 4vw, 1.2rem);
+        padding: 0.8rem 1rem;
+      }
+
+      .tm-hero .btn-primary {
+        padding: 0.8rem 2rem;
+        font-size: clamp(0.9rem, 2vw, 1rem);
+      }
+
+      .tm-form-section .btn {
+        padding: 0.4rem 1.2rem;
+        font-size: 0.85rem;
+      }
+    }
+
+    @media (min-width: 601px) and (max-width: 768px) {
+      .tm-hero h1 {
+        font-size: clamp(2.2rem, 5vw, 3.5rem);
+      }
+      
+      .tm-hero p {
+        font-size: clamp(1.1rem, 2.2vw, 1.3rem);
+      }
+    }
+  </style>
+
+  <!-- Script de compatibilidad -->
   <script>
     var renderPage = true;
     if (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0) {
@@ -682,71 +658,212 @@
   <section class="tm-hero">
     <div class="tm-hero-content">
       <h1>GP | Web Developer</h1>
-      <p>Transformo tu visión en sitios web modernos, funcionales y personalizados. 
-        <br>¡Eleva tu presencia digital conmigo!</p>
+      <p>Transformo tu visión en sitios web modernos, funcionales y personalizados.<br>¡Eleva tu presencia digital conmigo!</p>
       <a href="#portfolio" class="btn btn-primary">Ver mi Portafolio</a>
     </div>
   </section>
 
+  <!-- Contenedor Principal -->
   <div class="container">
-   <!-- 1ra Sección --> <section class="row tm-section"> <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 p-0"> <div class="tm-flex-center p-5 tm-bg-color-primary tm-section-min-h"> <h1 class="tm-text-color-white tm-site-name">Desarrollo Web</h1> </div> </div> <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6"> <div class="tm-flex-center p-5"> <q class="tm-quote tm-text-color-gray">Creo experiencias digitales únicas. <br> Tu visión, mi código.</q> </div> </div> </section> <!-- 2da Sección --> <section class="row tm-section tm-col-md-reverse"> <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6"> <div class="tm-flex-center p-5"> <div class="tm-md-flex-center"> <h2 class="tm-text-color-primary mb-4">Soluciones Web Personalizadas</h2> <p class="mb-4">Desarrollo sitios web a medida que potencian tu marca. Desde diseños modernos hasta funcionalidades avanzadas, te ayudo a destacar en el mundo digital.</p> </div> </div> </div> <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 p-0"> <div class="tm-flex-center p-5 tm-bg-color-primary"> <div class="tm-max-w-400 tm-flex-center tm-flex-col"> <!-- Logo con animaciones --> <div class="tm-logo-wrap"> <div class="tm-logo-glow"></div> <img id="site-logo" src="img/logo.png" alt="Imagen" class="tm-logo-img rounded-circle mb-4"> <div class="tm-logo-shine"></div> </div> <p class="tm-text-color-white small tm-font-thin mb-0 text-center"> Estoy comprometido en diseñar y desarrollar soluciones digitales innovadoras y estratégicas que no solo optimizan procesos, sino que también impulsan el crecimiento y la competitividad de tu negocio </p> </div> </div> </div> </section> <br> <!-- 3ra Sección --> <section class="row tm-section tm-mb-30"> <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 p-0 text-center"> <img src="img/diseño.png" alt="Imagen" class="img-fluid"> </div> <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6"> <div class="tm-flex-center p-5"> <div class="tm-flex-center tm-flex-col"> <h2 class="tm-align-left">Diseño y Desarrollo Web</h2> <p>Ofrezco servicios completos de diseño y desarrollo web. Cuéntame tu idea y la haré realidad. Sígueme en <a href="https://www.instagram.com/gian_pasquinelli/" target="_blank">Instagram</a> para más información.</p> </div> </div> </div> <br> </section> <!-- 4ta Sección --> <section class="row tm-section tm-mb-30 flex flex-wrap items-center"> <!-- Columna de texto --> <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8"> <div class="tm-flex-center pl-5 pr-5 pt-5 pb-5"> <div class="tm-md-flex-center"> <h2 class="mb-6 tm-text-color-primary text-3xl font-bold">Soluciones Digitales Completas</h2> <p class="mb-4 text-lg">Transformo tus ideas en sitios web a medida que <span class="text-purple-500 font-semibold">destacan tu marca</span> y <span class="text-purple-500 font-semibold">conectan con tus clientes</span>. Ofrezco:</p> <ul class="mb-4 space-y-3"> <li class="flex items-center"> <i class="fas fa-user text-green-500 mr-3"></i> <span class="text-green-500 font-semibold underline decoration-green-300 decoration-2">Portfolios personales</span> </li> <li class="flex items-center"> <i class="fas fa-building text-green-500 mr-3"></i> <span class="text-green-500 font-semibold underline decoration-green-300 decoration-2">Sitios corporativos</span> </li> <li class="flex items-center"> <i class="fas fa-shopping-cart text-green-500 mr-3"></i> <span class="text-green-500 font-semibold underline decoration-green-300 decoration-2">Tiendas en línea</span> </li> <li class="flex items-center"> <i class="fas fa-bullhorn text-green-500 mr-3"></i> <span class="text-green-500 font-semibold underline decoration-green-300 decoration-2">Landing pages</span> </li> </ul> <p class="mb-4 text-lg">Mis sitios son <span class="text-blue-500 font-semibold">100% responsivos</span>, optimizados para <span class="text-blue-500 font-semibold">SEO</span> y con <span class="text-blue-500 font-semibold">mantenimiento continuo</span>.</p> <p class="mb-4 text-lg">Cada proyecto es una oportunidad para <span class="text-red-500 font-semibold">innovar</span>, <span class="text-red-500 font-semibold">destacar</span> y <span class="text-red-500 font-semibold">crecer</span>.</p> <a href="https://www.instagram.com/gian_pasquinelli/" class="btn btn-primary mt-3" target="_blank">Conoce más</a> </div> </div> </div> <!-- Columna de imagen --> <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 flex justify-center items-center"> <img src="img/3D1.png" alt="Imagen" class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-500 max-w-full h-auto animate-float"> </div> </section>
-
 
     
-    <!-- 5ta Sección - Portafolio -->
+    <!-- Sección 1: Desarrollo Web -->
+    <section class="row tm-section">
+      <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 p-0">
+        <div class="tm-flex-center p-5 tm-bg-color-primary tm-section-min-h">
+          <h1 class="tm-text-color-white tm-site-name">Desarrollo Web</h1>
+        </div>
+      </div>
+
+      
+      <div class="tm-flex-center p-5" style="display: flex; justify-content: center; align-items: center; text-align: center; height: 100%;">
+        <q class="tm-quote tm-text-color-gray">
+          Creo experiencias digitales únicas.<br>
+          Tu visión, mi código.
+        </q>
+      </div>
+
+      </div>
+    </section>
+
+    <!-- Sección 2: Soluciones Web Personalizadas -->
+    <section class="row tm-section tm-col-md-reverse">
+      <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+        <div class="tm-flex-center p-5">
+          <div class="tm-md-flex-center">
+            <h2 class="tm-text-color-primary mb-4">Soluciones Web Personalizadas</h2>
+            <p class="mb-4">
+              Desarrollo sitios web a medida que potencian tu marca. 
+              Desde diseños modernos hasta funcionalidades avanzadas, 
+              te ayudo a destacar en el mundo digital.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 p-0">
+        <div class="tm-flex-center p-5 tm-bg-color-primary">
+          <div class="tm-max-w-400 tm-flex-center tm-flex-col">
+            <div class="tm-logo-wrap">
+              <div class="tm-logo-glow"></div>
+              <img id="site-logo" src="img/logo.png" alt="Logo GP WebDev" class="tm-logo-img rounded-circle mb-4">
+              <div class="tm-logo-shine"></div>
+            </div>
+            <p class="tm-text-color-white small tm-font-thin mb-0 text-center">
+              Estoy comprometido en diseñar y desarrollar soluciones digitales 
+              innovadoras y estratégicas que no solo optimizan procesos, 
+              sino que también impulsan el crecimiento y la competitividad de tu negocio
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección 3: Diseño y Desarrollo Web -->
+    <section class="row tm-section tm-mb-30">
+      <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 p-0 text-center">
+        <img src="img/diseño.png" alt="Diseño Web" class="img-fluid">
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+        <div class="tm-flex-center p-5">
+          <div class="tm-flex-center tm-flex-col">
+            <h2 class="tm-align-left">Diseño y Desarrollo Web</h2>
+            <p>
+              Ofrezco servicios completos de diseño y desarrollo web. 
+              Cuéntame tu idea y la haré realidad. 
+              Sígueme en <a href="https://www.instagram.com/gian_pasquinelli/" target="_blank">Instagram</a> 
+              para más información.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección 4: Soluciones Digitales Completas -->
+    <section class="row tm-section tm-mb-30 flex flex-wrap items-center">
+      <!-- Columna de texto -->
+      <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8">
+        <div class="tm-flex-center pl-5 pr-5 pt-5 pb-5">
+          <div class="tm-md-flex-center">
+            <h2 class="mb-6 tm-text-color-primary text-3xl font-bold">Soluciones Digitales Completas</h2>
+            <p class="mb-4 text-lg">
+              Transformo tus ideas en sitios web a medida que 
+              <span class="text-purple-500 font-semibold">destacan tu marca</span> y 
+              <span class="text-purple-500 font-semibold">conectan con tus clientes</span>. Ofrezco:
+            </p>
+            <ul class="mb-4 space-y-3">
+              <li class="flex items-center">
+                <i class="fas fa-user text-green-500 mr-3"></i>
+                <span class="text-green-500 font-semibold underline decoration-green-300 decoration-2">
+                  Portfolios personales
+                </span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-building text-green-500 mr-3"></i>
+                <span class="text-green-500 font-semibold underline decoration-green-300 decoration-2">
+                  Sitios corporativos
+                </span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-shopping-cart text-green-500 mr-3"></i>
+                <span class="text-green-500 font-semibold underline decoration-green-300 decoration-2">
+                  Tiendas en línea
+                </span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-bullhorn text-green-500 mr-3"></i>
+                <span class="text-green-500 font-semibold underline decoration-green-300 decoration-2">
+                  Landing pages
+                </span>
+              </li>
+            </ul>
+            <p class="mb-4 text-lg">
+              Mis sitios son <span class="text-blue-500 font-semibold">100% responsivos</span>, 
+              optimizados para <span class="text-blue-500 font-semibold">SEO</span> y con 
+              <span class="text-blue-500 font-semibold">mantenimiento continuo</span>.
+            </p>
+            <p class="mb-4 text-lg">
+              Cada proyecto es una oportunidad para 
+              <span class="text-red-500 font-semibold">innovar</span>, 
+              <span class="text-red-500 font-semibold">destacar</span> y 
+              <span class="text-red-500 font-semibold">crecer</span>.
+            </p>
+            <a href="https://www.instagram.com/gian_pasquinelli/" class="btn btn-primary mt-3" target="_blank">
+              Conoce más
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- Columna de imagen -->
+      <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 flex justify-center items-center">
+        <img src="img/3D1.png" alt="Soluciones Digitales" class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-500 max-w-full h-auto animate-float">
+      </div>
+    </section>
+
+    <!-- Sección 5: Portafolio -->
     <section id="portfolio" class="row tm-section tm-mb-30">
       <div class="col-12">
         <br>
         <h2 class="tm-text-color-primary text-center mb-4">Mi Portafolio</h2>
         <div class="tm-portfolio-grid">
+          <!-- Proyecto 1 -->
           <div class="tm-portfolio-card">
             <div class="tm-portfolio-card-image">
               <img src="img/bar.png" alt="Bar 1985">
             </div>
             <div class="tm-portfolio-card-content">
-              <h3 class="tm-portfolio-card-title">Bar Cocteleria</h3>
+              <h3 class="tm-portfolio-card-title">Bar Coctelería</h3>
               <a href="https://bar1985.vercel.app/" target="_blank">Visitar sitio</a>
             </div>
           </div>
+
+          <!-- Proyecto 2 -->
           <div class="tm-portfolio-card">
             <div class="tm-portfolio-card-image">
-              <img src="img/carga.gif" alt="Proyecto xxx">
+              <img src="img/carga.gif" alt="Proyecto en desarrollo">
             </div>
             <div class="tm-portfolio-card-content">
               <h3 class="tm-portfolio-card-title">En Desarrollo...</h3>
-              <a href="" target="_blank">Próximamente</a>
+              <a href="#" target="_blank">Próximamente</a>
             </div>
           </div>
+
+          <!-- Proyecto 3 -->
           <div class="tm-portfolio-card">
             <div class="tm-portfolio-card-image">
-              <img src="img/barber.png" alt="Barber Shop">
+              <img src="img/barber.png" alt="Barber Studio">
             </div>
             <div class="tm-portfolio-card-content">
               <h3 class="tm-portfolio-card-title">Barber Studio</h3>
               <a href="https://barber-shop-omega-two.vercel.app/" target="_blank">Visitar sitio</a>
             </div>
           </div>
+
+          <!-- Proyecto 4 -->
           <div class="tm-portfolio-card">
             <div class="tm-portfolio-card-image">
-              <img src="img/studio.png" alt="Studio">
+              <img src="img/studio.png" alt="Studio INK">
             </div>
             <div class="tm-portfolio-card-content">
               <h3 class="tm-portfolio-card-title">Studio INK</h3>
               <a href="https://studio-mauve-eight-58.vercel.app/" target="_blank">Visitar sitio</a>
             </div>
           </div>
+
+          <!-- Proyecto 5 -->
           <div class="tm-portfolio-card">
             <div class="tm-portfolio-card-image">
-              <img src="img/coffe.png" alt="Coffelp">
+              <img src="img/coffe.png" alt="Cafetería LP">
             </div>
             <div class="tm-portfolio-card-content">
-              <h3 class="tm-portfolio-card-title">Cafeteria Lp</h3>
+              <h3 class="tm-portfolio-card-title">Cafetería LP</h3>
               <a href="https://coffelp.vercel.app/" target="_blank">Visitar sitio</a>
             </div>
           </div>
+
+          <!-- Proyecto 6 -->
           <div class="tm-portfolio-card">
             <div class="tm-portfolio-card-image">
-              <img src="img/design.png" alt="Design">
+              <img src="img/design.png" alt="Diseño y Decoración">
             </div>
             <div class="tm-portfolio-card-content">
               <h3 class="tm-portfolio-card-title">Diseño y Decoración</h3>
@@ -757,7 +874,7 @@
       </div>
     </section>
 
-    <!-- 6ta Sección - Formulario de Contacto (transparente) -->
+    <!-- Sección 6: Formulario de Contacto -->
     <section class="row tm-form-section">
       <div class="col-lg-12 tm-form-header">
         <h2 class="tm-container-inner">Formulario de Contacto</h2>
@@ -772,13 +889,14 @@
               <input type="email" id="contact_email" name="contact_email" class="form-control" placeholder="Tu Correo Electrónico" required/>
             </div>
             <div class="form-group">
-              <select name="project_type">
-                <option value="website">Portfolio Personal</option>
-                <option value="website">Sitio Web Corporativo</option>
+              <select name="project_type" required>
+                <option value="">Selecciona un tipo de proyecto</option>
+                <option value="portfolio">Portfolio Personal</option>
+                <option value="corporativo">Sitio Web Corporativo</option>
                 <option value="ecommerce">Tienda en Línea</option>
                 <option value="landing">Landing Page</option>
                 <option value="custom">Proyecto Personalizado</option>
-                <option value="website">Otro</option>
+                <option value="otro">Otro</option>
               </select>
             </div>
             <div class="form-group">
@@ -792,17 +910,17 @@
           </div>
           <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <div class="form-group">
-              <textarea id="contact_message" name="contact_message" class="form-control" rows="6" placeholder="Mensaje Adicional" required></textarea>
+              <textarea id="contact_message" name="contact_message" class="form-control" rows="6" placeholder="Describe tu proyecto o mensaje adicional" required></textarea>
             </div>
           </div>
           <div class="col-xs-12 mt-4 tm-center">
-            <button type="submit" class="btn btn-primary">Enviar</button>
+            <button type="submit" class="btn btn-primary">Enviar Mensaje</button>
           </div>
         </form>
       </div>
     </section>
 
-    <!-- Footer (superpuesto y más arriba) -->
+    <!-- Footer -->
     <section class="row tm-footer-section">
       <div class="container">
         <div class="row tm-container-inner">
@@ -822,15 +940,15 @@
             <div class="tm-footer-info-box">
               <h4>¡Mis redes sociales!</h4>
               <div class="tm-social-links">
-                <a href="https://www.instagram.com/gian_pasquinelli/" target="_blank">
+                <a href="https://www.instagram.com/gian_pasquinelli/" target="_blank" rel="noopener noreferrer">
                   <img src="img/insta.png" alt="Instagram">
                   <span>@gian_pasquinelli</span>
                 </a>
-                <a href="https://www.linkedin.com/in/gian-pasquinelli/" target="_blank">
+                <a href="https://www.linkedin.com/in/gian-pasquinelli/" target="_blank" rel="noopener noreferrer">
                   <img src="img/linkedin.png" alt="LinkedIn">
                   <span>Perfil de LinkedIn</span>
                 </a>
-                <a href="https://wa.me/5493471417071" target="_blank">
+                <a href="https://wa.me/5493471417071" target="_blank" rel="noopener noreferrer">
                   <img src="img/wpp.png" alt="WhatsApp">
                   <span>¡Hablemos por WhatsApp!</span>
                 </a>
@@ -841,21 +959,27 @@
       </div>
     </section>
 
-    <!-- WhatsApp Floating Button -->
-    <div class="whatsapp-float">
-      <a href="https://wa.me/5493471417071?text=Hola%20GP%20WebDev,%20quiero%20consultar%20sobre%20mis%20servicios%20de%20desarrollo%20web" target="_blank">
-        <img src="img/botonwpp.png" alt="WhatsApp">
-      </a>
-    </div>
-
-    <!-- Pie de página -->
+    <!-- Copyright -->
     <div class="row">
       <div class="col-lg-12">
-        <p class="text-center small tm-copyright-text mb-0"> &copy; Copyright <span class="tm-current-year"></span> | <a href="https://www.instagram.com/gian_pasquinelli/" class="tm-text-color-blank" target="_blank">Gianluca Pasquinelli</a></p>      </div>
+        <p class="text-center small tm-copyright-text mb-0">
+          &copy; Copyright <span class="tm-current-year"></span> | 
+          <a href="https://www.instagram.com/gian_pasquinelli/" class="tm-text-color-blank" target="_blank" rel="noopener noreferrer">
+            Gianluca Pasquinelli
+          </a>
+        </p>
+      </div>
     </div>
   </div>
 
-  <!-- Cargar JS -->
+  <!-- WhatsApp Floating Button -->
+  <div class="whatsapp-float">
+    <a href="https://wa.me/5493471417071?text=Hola%20GP%20WebDev,%20quiero%20consultar%20sobre%20mis%20servicios%20de%20desarrollo%20web" target="_blank" rel="noopener noreferrer">
+      <img src="img/botonwpp.png" alt="Chat en WhatsApp">
+    </a>
+  </div>
+
+  <!-- Scripts -->
   <script src="js/jquery-3.2.1.slim.min.js"></script>
   <script>
     $(function(){
@@ -867,7 +991,3 @@
   </script>
 </body>
 </html>
-
-
-
-
