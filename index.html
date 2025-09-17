@@ -49,7 +49,11 @@
     justify-content: center;
     text-align: center;
     position: relative;
-    overflow: hidden;
+    overflow: visible !important;
+    transform-style: preserve-3d;
+    will-change: transform;
+    /* Parallax background effect */
+    background-attachment: fixed;
   }
 
   .tm-hero::before {
@@ -75,6 +79,9 @@
     max-width: 800px;
     padding: 2rem;
     animation: fadeInUp 1s ease-out;
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    transform: translateZ(0);
   }
 
   @keyframes fadeInUp {
@@ -101,18 +108,11 @@
       0 0 20px rgba(0, 0, 0, 0.3),
       0 0 40px rgba(0, 0, 0, 0.2);
     
-    /* Alternativa comentada: efecto de gradiente */
-    /*
-    background: linear-gradient(135deg, 
-      rgba(153, 51, 51, 0.9) 0%, 
-      rgba(236, 73, 73, 0.9) 100%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    */
-    
     position: relative;
     overflow: hidden;
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    transform: translateZ(0);
   }
 
   .tm-hero h1::after {
@@ -148,6 +148,9 @@
     
     /* Sombra de texto para mejor legibilidad */
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    transform: translateZ(0);
   }
 
   /* Botón principal del hero mejorado */
@@ -171,6 +174,9 @@
     position: relative;
     overflow: hidden;
     text-decoration: none;
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    transform: translateZ(0);
   }
 
   .tm-hero .btn-primary::before {
@@ -581,9 +587,14 @@
   }
 
   @media (max-width: 600px) {
+    .tm-portfolio-grid {
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+
     .tm-portfolio-card {
       max-inline-size: 100%;
-      margin: 0.5rem;
+      margin: 0;
     }
 
     .whatsapp-float {
@@ -619,6 +630,7 @@
     .tm-hero {
       min-height: 100vh;
       padding: 1rem;
+      background-attachment: scroll; /* Desactiva parallax en mobile */
     }
 
     .tm-hero h1 {
@@ -641,16 +653,76 @@
       padding: 0.4rem 1.2rem;
       font-size: 0.85rem;
     }
+
+    /* Ajustes para secciones en móvil */
+    .tm-flex-center {
+      min-height: auto;
+      padding: 2rem 1rem;
+    }
+
+    .tm-section .row {
+      margin: 0 -1rem;
+    }
+
+    .tm-section [class*="col-"] {
+      padding: 0 1rem;
+      margin-bottom: 2rem;
+    }
+
+    /* Ajuste para la 4ta sección en móvil */
+    .tm-section.tm-mb-30.flex {
+      display: block;
+    }
+
+    .tm-section.tm-mb-30.flex [class*="col-"] {
+      width: 100%;
+      text-align: center;
+    }
+
+    .tm-section.tm-mb-30.flex img {
+      max-width: 100%;
+      height: auto;
+      margin-top: 1rem;
+    }
+
+    /* Ajuste para listas en móvil */
+    ul.space-y-3 {
+      padding-left: 0;
+    }
+
+    ul.space-y-3 li {
+      margin-bottom: 0.5rem;
+    }
   }
 
   /* Mejora adicional para pantallas medianas */
   @media (min-width: 601px) and (max-width: 768px) {
+    .tm-portfolio-grid {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+    }
+
     .tm-hero h1 {
       font-size: clamp(2.2rem, 5vw, 3.5rem);
     }
     
     .tm-hero p {
       font-size: clamp(1.1rem, 2.2vw, 1.3rem);
+    }
+
+    .tm-flex-center {
+      min-height: 300px;
+    }
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    .tm-portfolio-grid {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .container {
+      max-inline-size: 100%;
+      padding-inline: 2rem;
     }
   }
 
@@ -660,7 +732,6 @@
   }
 </style>
 
-
   <script>
     var renderPage = true;
     if (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0) {
@@ -668,6 +739,75 @@
       renderPage = false;
     }
   </script>
+
+  <!-- jQuery COMPLETO para el efecto parallax (ANTES del slim) -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
+  <!-- Script del Parallax -->
+  <script type="text/javascript">
+  (function() {
+    $(document).ready(function() {
+      console.log("Parallax inicializando...");
+      
+      /* Globals */
+      var $window = $(window),
+          $body = $('body'),
+          scrollIntervalID = 0,
+          windowHeight = 0,
+          scrollTop = 0,
+          scrollY = 0,
+          parallaxSpeed = 0.5;
+
+      /* Inicialización */
+      var initParallax = function() {
+        console.log("Iniciando parallax...");
+        windowHeight = $window.height();
+        $window.on('scroll', updateParallax);
+        updateParallax();
+      };
+
+      /* Función principal del parallax */
+      var updateParallax = function() {
+        scrollTop = $window.scrollTop();
+        scrollY = scrollTop * parallaxSpeed;
+        
+        // Aplicar transformación al fondo del hero
+        $('.tm-hero').css({
+          'background-position-y': scrollY + 'px'
+        });
+
+        // Aplicar transformaciones a los elementos del contenido
+        var parallaxAmount = scrollTop * 0.3;
+        
+        $('.tm-hero h1').css({
+          'transform': 'translateY(' + (-parallaxAmount * 0.8) + 'px)',
+          'opacity': 1 - (scrollTop / windowHeight * 0.2)
+        });
+
+        $('.tm-hero p').css({
+          'transform': 'translateY(' + (-parallaxAmount * 0.6) + 'px)',
+          'opacity': 1 - (scrollTop / windowHeight * 0.1)
+        });
+
+        $('.tm-hero .btn-primary').css({
+          'transform': 'translateY(' + (-parallaxAmount * 0.4) + 'px)',
+          'opacity': 1 - (scrollTop / windowHeight * 0.05)
+        });
+
+        $('.tm-hero-content').css({
+          'transform': 'translateY(' + (-parallaxAmount * 0.2) + 'px) scale(' + (1 + (scrollTop / windowHeight * 0.05)) + ')'
+        });
+      };
+
+      /* Inicializar cuando el DOM esté listo */
+      initParallax();
+      
+      // Debug - puedes quitar esto después
+      console.log("Parallax configurado correctamente");
+    });
+  }).call(this);
+  </script>
+
 </head>
 
 <body>
@@ -785,7 +925,7 @@
                 <span class="text-green-500 font-semibold underline decoration-green-300 decoration-2">Landing pages</span>
               </li>
             </ul>
-            <p class="mb-4 text-lg">Los sitios son <span class="text-blue-500 font-semibold">100% responsivos</span>, optimizados para <span class="text-blue-500 font-semibold">SEO</span> y con <span class="text-blue-500 font-semibold">mantenimiento continuo</span>.</p>
+            <p class="mb-4 text-lg">Mis sitios son <span class="text-blue-500 font-semibold">100% responsivos</span>, optimizados para <span class="text-blue-500 font-semibold">SEO</span> y con <span class="text-blue-500 font-semibold">mantenimiento continuo</span>.</p>
             <p class="mb-4 text-lg">Cada proyecto es una oportunidad para <span class="text-red-500 font-semibold">innovar</span>, <span class="text-red-500 font-semibold">destacar</span> y <span class="text-red-500 font-semibold">crecer</span>.</p>
             <a href="https://www.instagram.com/gian_pasquinelli/" class="btn btn-primary mt-3" target="_blank">Conoce más</a>
           </div>
@@ -959,7 +1099,7 @@
     </div>
   </div>
 
-  <!-- Cargar JS -->
+  <!-- jQuery SLIM (después del jQuery completo para no interferir) -->
   <script src="js/jquery-3.2.1.slim.min.js"></script>
   <script>
     $(function(){
@@ -971,8 +1111,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
