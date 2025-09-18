@@ -16,7 +16,7 @@ body {
     font-family: 'Open Sans', Helvetica, Arial, sans-serif;
     font-size: clamp(16px, 2.5vw, 18px);
     color: var(--text-color);
-    background-image: url('../img/background.jpg');
+    background-image: url('../img/');
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: fixed;
@@ -434,4 +434,5 @@ select:focus {
     }
 
     
+
 }
