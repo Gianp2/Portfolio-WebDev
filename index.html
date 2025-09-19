@@ -16,9 +16,9 @@
   :root {
     --primary-color: #993333;
     --primary-hover: #ec4949;
-    --secondary-color: #009999;
-    --secondary-hover: #24d4d4;
-    --text-color: #666666;
+    --secondary-color: #00d2d2;
+    --secondary-hover: #000000;
+    --text-color: #3b3b3b;
     --bg-gray: #f8f9fa;
     --white: #ffffff;
     --transition: all 0.3s ease;
@@ -43,7 +43,7 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    min-height: 100vh; /* Altura completa de la ventana */
+    min-block-size: 100vh; /* Altura completa de la ventana */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -59,10 +59,10 @@
   .tm-hero::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    inline-size: 100%;
+    block-size: 100%;
     background: linear-gradient(
       135deg,
       rgba(0, 0, 0, 0.7) 0%,
@@ -76,7 +76,7 @@
     position: relative;
     z-index: 2;
     color: var(--white);
-    max-width: 800px;
+    max-inline-size: 800px;
     padding: 2rem;
     animation: fadeInUp 1s ease-out;
     will-change: transform, opacity;
@@ -98,7 +98,7 @@
   .tm-hero h1 {
     font-size: clamp(2.5rem, 6vw, 4.5rem);
     font-weight: 700;
-    margin-bottom: 1.5rem;
+    margin-block-end: 1.5rem;
     line-height: 1.2;
     
     /* Título en blanco con sombra mejorada para legibilidad */
@@ -118,11 +118,11 @@
   .tm-hero h1::after {
     content: '';
     position: absolute;
-    bottom: -5px;
-    left: 50%;
+    inset-block-end: -5px;
+    inset-inline-start: 50%;
     transform: translateX(-50%);
-    width: 60px;
-    height: 3px;
+    inline-size: 60px;
+    block-size: 3px;
     background: linear-gradient(90deg, 
       transparent 0%, 
       var(--secondary-color) 50%, 
@@ -132,7 +132,7 @@
 
   .tm-hero p {
     font-size: clamp(1.1rem, 2.5vw, 1.4rem);
-    margin-bottom: 2.5rem;
+    margin-block-end: 2.5rem;
     line-height: 1.6;
     opacity: 0.95;
     
@@ -140,11 +140,11 @@
     background: rgba(0, 0, 0, 0.4);
     padding: 1rem 1.5rem;
     border-radius: 15px;
-    border-left: 4px solid var(--secondary-color);
+    border-inline-start: 4px solid var(--secondary-color);
     display: inline-block;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+    max-inline-size: 600px;
+    margin-inline-start: auto;
+    margin-inline-end: auto;
     
     /* Sombra de texto para mejor legibilidad */
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
@@ -182,10 +182,10 @@
   .tm-hero .btn-primary::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
+    inset-block-start: 0;
+    inset-inline-start: -100%;
+    inline-size: 100%;
+    block-size: 100%;
     background: linear-gradient(90deg, 
       transparent, 
       rgba(255, 255, 255, 0.2), 
@@ -194,7 +194,7 @@
   }
 
   .tm-hero .btn-primary:hover::before {
-    left: 100%;
+    inset-inline-start: 100%;
   }
 
   .tm-hero .btn-primary:hover {
@@ -211,10 +211,10 @@
   .tm-hero::after {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    inline-size: 100%;
+    block-size: 100%;
     background-image: 
       radial-gradient(2px 2px at 20px 30px, rgba(255, 255, 255, 0.3), transparent),
       radial-gradient(2px 2px at 40px 70px, rgba(255, 255, 255, 0.2), transparent),
@@ -233,105 +233,214 @@
     to { transform: translateY(-100px); }
   }
 
-  /* Portfolio Grid */
-  .tm-portfolio-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    padding: 20px 0;
+  /* Portfolio Section Improvements */
+  #portfolio {
+    background: linear-gradient(135deg, var(--bg-gray) 0%, #ffffff 100%);
+    padding: 4rem 0;
+    position: relative;
+    overflow: hidden;
   }
 
-  /* Portfolio Card */
+  #portfolio::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(0,0,0,0.05)"/><circle cx="75" cy="75" r="1" fill="rgba(0,0,0,0.03)"/><circle cx="50" cy="10" r="0.5" fill="rgba(0,0,0,0.04)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .tm-portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    padding: 2rem 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Improved Portfolio Card */
   .tm-portfolio-card {
     background: var(--white);
-    border-radius: 8px;
-    box-shadow: var(--shadow);
+    border-radius: 16px;
+    box-shadow: var(--shadow), 0 0 0 1px rgba(255, 255, 255, 0.1);
     overflow: hidden;
     transition: var(--transition);
     max-inline-size: 360px;
     margin: 0 auto;
     text-align: center;
+    position: relative;
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+    transform: translateY(20px);
   }
 
+  .tm-portfolio-card:nth-child(1) { animation-delay: 0.1s; }
+  .tm-portfolio-card:nth-child(2) { animation-delay: 0.2s; }
+  .tm-portfolio-card:nth-child(3) { animation-delay: 0.3s; }
+  .tm-portfolio-card:nth-child(4) { animation-delay: 0.4s; }
+  .tm-portfolio-card:nth-child(5) { animation-delay: 0.5s; }
+  .tm-portfolio-card:nth-child(6) { animation-delay: 0.6s; }
+
   .tm-portfolio-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(153, 51, 51, 0.1);
   }
 
   .tm-portfolio-card-image {
-    width: 100%;
-    height: 200px; /* Fixed height for uniformity */
+    inline-size: 100%;
+    block-size: 220px;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background: var(--bg-gray); /* Fallback background */
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+    position: relative;
   }
 
   .tm-portfolio-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensures images fill the container without distortion */
-    object-position: center; /* Centers the image */
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+    object-position: center;
     display: block;
+    transition: var(--transition);
+  }
+
+  .tm-portfolio-card:hover .tm-portfolio-card img {
+    transform: scale(1.1);
+    filter: brightness(1.1);
   }
 
   .tm-portfolio-card-content {
-    padding: 1.5rem;
+    padding: 2rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    min-block-size: 120px;
   }
 
   .tm-portfolio-card-title {
-    font-size: clamp(1.2rem, 2vw, 1.4rem);
-    margin-block-end: 0.5rem;
+    font-size: clamp(1.3rem, 2.2vw, 1.5rem);
+    margin-block-end: 0.8rem;
     color: var(--primary-color);
-    width: 100%;
+    inline-size: 100%;
+    text-align: center;
+    font-weight: 600;
+    position: relative;
+  }
+
+  .tm-portfolio-card-title::after {
+    content: '';
+    position: absolute;
+    bottom: -0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--secondary-color) 0%, transparent 100%);
+  }
+
+  .tm-portfolio-card-description {
+    font-size: 0.95rem;
+    color: var(--text-color);
+    margin-block-end: 1.5rem;
+    line-height: 1.5;
+    opacity: 0.8;
+    max-width: 100%;
     text-align: center;
   }
 
-  .tm-portfolio-card a {
-    color: var(--secondary-color);
+  /* Improved Buttons in Cards */
+  .tm-portfolio-card .btn-portfolio {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 2rem;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+    color: var(--white);
+    font-weight: 600;
+    font-size: clamp(0.95rem, 1.3vw, 1.05rem);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 50px;
     text-decoration: none;
-    font-weight: 500;
-    font-size: clamp(0.9rem, 1.5vw, 1rem);
-    margin-top: 0.5rem;
+    transition: var(--transition);
+    box-shadow: 0 4px 15px rgba(153, 51, 51, 0.3);
+    position: relative;
+    overflow: hidden;
+    border: none;
+    cursor: pointer;
   }
 
-  .tm-portfolio-card a:hover {
-    color: var(--secondary-hover);
-    text-decoration: underline;
+  .tm-portfolio-card .btn-portfolio::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+  }
+
+  .tm-portfolio-card .btn-portfolio:hover::before {
+    left: 100%;
+  }
+
+  .tm-portfolio-card .btn-portfolio:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(153, 51, 51, 0.4);
+    background: linear-gradient(135deg, var(--primary-hover) 0%, #ff6b6b 100%);
+    color: var(--white);
+  }
+
+  .tm-portfolio-card .btn-portfolio.coming-soon {
+    background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
+    box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .tm-portfolio-card .btn-portfolio.coming-soon:hover {
+    transform: none;
+    box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
+    background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
   }
 
   /* EFECTO DE ESCRITURA SOLO PARA "EN DESARROLLO..." */
   .typing-effect {
     position: relative;
     display: inline-block;
-    min-height: 1.4rem;
+    min-block-size: 1.4rem;
     overflow: hidden;
-    border-right: 2px solid var(--secondary-color);
+    border-inline-end: 2px solid var(--secondary-color);
     white-space: nowrap;
     margin: 0 auto;
     text-align: center;
     animation: typing 2.5s steps(15, end), blink-caret 0.75s step-end infinite;
+    color: var(--secondary-color);
+    font-style: italic;
   }
 
   .typing-effect::after {
     content: '';
     position: absolute;
-    right: -2px;
-    top: 0;
-    width: 2px;
-    height: 100%;
+    inset-inline-end: -2px;
+    inset-block-start: 0;
+    inline-size: 2px;
+    block-size: 100%;
     background-color: var(--secondary-color);
     animation: blink 0.75s infinite;
   }
 
   @keyframes typing {
-    from { width: 0; }
-    to { width: 100%; }
+    from { inline-size: 0; }
+    to { inline-size: 100%; }
   }
 
   @keyframes blink {
@@ -362,8 +471,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    min-height: 400px;
+    inline-size: 100%;
+    min-block-size: 400px;
   }
 
   .btn {
@@ -397,10 +506,10 @@
   .tm-max-w-400 { max-inline-size: 400px; }
 
   .tm-logo-img {
-    max-width: 150px;
-    max-height: 150px;
-    width: 100%;
-    height: auto;
+    max-inline-size: 150px;
+    max-block-size: 150px;
+    inline-size: 100%;
+    block-size: auto;
     object-fit: cover;
     border-radius: 50%;
   }
@@ -408,8 +517,8 @@
   /* BOTÓN DE WHATSAPP CON EFECTOS AVANZADOS */
   .whatsapp-float {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    inset-block-end: 20px;
+    inset-inline-end: 20px;
     z-index: 1000;
     animation: float 3s ease-in-out infinite;
   }
@@ -418,8 +527,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 60px;
-    height: 60px;
+    inline-size: 60px;
+    block-size: 60px;
     background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
     border-radius: 50%;
     box-shadow: 
@@ -436,10 +545,10 @@
   .whatsapp-float a::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
+    inset-block-start: 0;
+    inset-inline-start: -100%;
+    inline-size: 100%;
+    block-size: 100%;
     background: linear-gradient(90deg, 
       transparent, 
       rgba(255, 255, 255, 0.2), 
@@ -448,7 +557,7 @@
   }
 
   .whatsapp-float a:hover::before {
-    left: 100%;
+    inset-inline-start: 100%;
   }
 
   .whatsapp-float a:hover {
@@ -467,8 +576,8 @@
   }
 
   .whatsapp-float img {
-    width: 32px;
-    height: 32px;
+    inline-size: 32px;
+    block-size: 32px;
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
     transition: all 0.3s ease;
     z-index: 2;
@@ -484,10 +593,10 @@
   .whatsapp-float a::after {
     content: '';
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
+    inset-block-start: 50%;
+    inset-inline-start: 50%;
+    inline-size: 0;
+    block-size: 0;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.3);
     transform: translate(-50%, -50%);
@@ -495,8 +604,8 @@
   }
 
   .whatsapp-float a:active::after {
-    width: 100px;
-    height: 100px;
+    inline-size: 100px;
+    block-size: 100px;
   }
 
   /* Animación de flotación */
@@ -533,7 +642,7 @@
   /* Centered form title */
   .tm-form-header {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-block-end: 2rem;
   }
 
   .tm-form-header h2 {
@@ -562,28 +671,28 @@
   .tm-form-section label {
     color: #ffffff !important;
     font-weight: 500;
-    margin-bottom: 0.5rem;
+    margin-block-end: 0.5rem;
     display: block;
   }
 
   /* Inputs del formulario */
   .tm-form-section .form-control {
     background-color: rgba(0, 0, 0, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid #ffffffa2;
     color: #ffffff !important;
     padding: 0.75rem;
     border-radius: 4px;
-    margin-bottom: 1rem;
-    width: 100%;
+    margin-block-end: 1rem;
+    inline-size: 100%;
   }
 
   .tm-form-section .form-control::placeholder {
-    color: rgba(255, 255, 255, 0.7) !important;
+    color: rgb(255, 255, 255) !important;
   }
 
   .tm-form-section .form-control:focus {
     background-color: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.5);
+    border-color: #ffffffa2;
     color: #ffffff !important;
     box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.2);
     outline: none;
@@ -592,12 +701,12 @@
   /* Selects del formulario */
   .tm-form-section select {
     background-color: rgba(0, 0, 0, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgb(255, 255, 255);
     color: #ffffff !important;
     padding: 0.75rem;
     border-radius: 4px;
-    margin-bottom: 1rem;
-    width: 100%;
+    margin-block-end: 1rem;
+    inline-size: 100%;
     font-size: inherit;
     cursor: pointer;
   }
@@ -616,6 +725,11 @@
     box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.2);
   }
 
+
+
+
+
+  
   /* Para navegadores específicos */
   .tm-form-section select::-ms-expand {
     color: #ffffff;
@@ -623,7 +737,7 @@
   }
 
   .tm-form-section select::-webkit-scrollbar {
-    width: 8px;
+    inline-size: 8px;
   }
 
   .tm-form-section select::-webkit-scrollbar-track {
@@ -637,17 +751,19 @@
 
   /* Botón del formulario - ACHICADO */
   .tm-form-section .btn {
-    background: var(--primary-color);
-    border-color: var(--primary-color);
-    color: var(--white);
-    padding: 0.5rem 1.5rem; /* Reducido de 0.75rem 2rem */
-    border-radius: 4px;
-    font-size: 0.9rem; /* Reducido de 1rem */
-    transition: var(--transition);
-    cursor: pointer;
-    width: 100%;
-    margin-top: 1rem;
+      background: var(--primary-color);
+      border-color: var(--primary-color);
+      color: var(--white);
+      padding: 0.5rem 1.5rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      transition: var(--transition);
+      cursor: pointer;
+      inline-size: auto; /* ya no ocupa todo el ancho */
+      margin-block-start: 1rem;
   }
+
+
 
   .tm-form-section .btn:hover {
     background: var(--primary-hover);
@@ -661,20 +777,20 @@
     background-color: var(--primary-color) !important;
     color: var(--white);
     padding: 2rem 0;
-    margin-top: -2rem; /* Lo sube más arriba */
+    margin-block-start: -2rem; /* Lo sube más arriba */
     position: relative;
     z-index: 2;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-    margin-bottom: 2rem;
+    border-start-start-radius: 8px;
+    border-start-end-radius: 8px;
+    margin-block-end: 2rem;
   }
 
   .tm-footer-info-box {
-    margin-bottom: 1rem;
+    margin-block-end: 1rem;
   }
 
   .tm-footer-info-box h4 {
-    margin-bottom: 1rem;
+    margin-block-end: 1rem;
     color: var(--white);
   }
 
@@ -708,8 +824,8 @@
   }
 
   .tm-social-links img {
-    width: 28px;
-    height: 28px;
+    inline-size: 28px;
+    block-size: 28px;
     border-radius: 6px;
   }
 
@@ -727,7 +843,7 @@
     text-decoration: underline;
   }
 
-  @media (max-width: 600px) {
+  @media (max-inline-size: 600px) {
     .tm-portfolio-grid {
       grid-template-columns: 1fr;
       gap: 15px;
@@ -739,23 +855,23 @@
     }
 
     .whatsapp-float {
-      bottom: 15px;
-      right: 15px;
+      inset-block-end: 15px;
+      inset-inline-end: 15px;
       animation-duration: 2.5s;
     }
 
     .whatsapp-float a {
-      width: 50px;
-      height: 50px;
+      inline-size: 50px;
+      block-size: 50px;
     }
 
     .whatsapp-float img {
-      width: 28px;
-      height: 28px;
+      inline-size: 28px;
+      block-size: 28px;
     }
 
     .tm-footer-section {
-      margin-top: -1rem;
+      margin-block-start: -1rem;
       padding: 1.5rem 0;
     }
 
@@ -770,7 +886,7 @@
     }
 
     .tm-hero {
-      min-height: 100vh;
+      min-block-size: 100vh;
       padding: 1rem;
       background-attachment: scroll; /* Desactiva parallax en mobile */
     }
@@ -798,7 +914,7 @@
 
     /* Ajustes para secciones en móvil */
     .tm-flex-center {
-      min-height: auto;
+      min-block-size: auto;
       padding: 2rem 1rem;
     }
 
@@ -808,7 +924,7 @@
 
     .tm-section [class*="col-"] {
       padding: 0 1rem;
-      margin-bottom: 2rem;
+      margin-block-end: 2rem;
     }
 
     /* Ajuste para la 4ta sección en móvil */
@@ -817,36 +933,50 @@
     }
 
     .tm-section.tm-mb-30.flex [class*="col-"] {
-      width: 100%;
+      inline-size: 100%;
       text-align: center;
     }
 
     .tm-section.tm-mb-30.flex img {
-      max-width: 100%;
-      height: auto;
-      margin-top: 1rem;
+      max-inline-size: 100%;
+      block-size: auto;
+      margin-block-start: 1rem;
     }
 
     /* Ajuste para listas en móvil */
     ul.space-y-3 {
-      padding-left: 0;
+      padding-inline-start: 0;
     }
 
     ul.space-y-3 li {
-      margin-bottom: 0.5rem;
+      margin-block-end: 0.5rem;
     }
 
     /* Ajuste del efecto de escritura en móvil */
     .typing-effect {
       font-size: clamp(1rem, 2.5vw, 1.2rem);
     }
+
+    #portfolio {
+      padding: 2rem 0;
+    }
+
+    .tm-portfolio-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      padding: 1rem 0;
+    }
+
+    .tm-portfolio-card-image {
+      block-size: 200px;
+    }
   }
 
   /* Mejora adicional para pantallas medianas */
-  @media (min-width: 601px) and (max-width: 768px) {
+  @media (min-inline-size: 601px) and (max-inline-size: 768px) {
     .tm-portfolio-grid {
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 15px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
     }
 
     .tm-hero h1 {
@@ -858,13 +988,13 @@
     }
 
     .tm-flex-center {
-      min-height: 300px;
+      min-block-size: 300px;
     }
   }
 
-  @media (min-width: 769px) and (max-width: 992px) {
+  @media (min-inline-size: 769px) and (max-inline-size: 992px) {
     .tm-portfolio-grid {
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     }
 
     .container {
@@ -874,10 +1004,30 @@
   }
 
   /* Smooth scroll para navegación interna */
-  html {
-    scroll-behavior: smooth;
+    html {
+      scroll-behavior: smooth;
+    }
+
+  /* ==== EFECTO LEVITACIÓN ==== */
+  .img-levitate {
+    display: inline-block;
+    animation: levitate 3s ease-in-out infinite;
+    transition: transform 0.3s ease;
   }
-</style>
+
+  @keyframes levitate {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-15px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+
+  </style>
 
   <script>
     var renderPage = true;
@@ -965,23 +1115,28 @@
     <div class="loader-section section-right"></div>
   </div>
 
-  <!-- Hero Section -->
-  <section class="tm-hero">
-    <div class="tm-hero-content">
-      <h1>GP | Web Developer</h1>
-      <p>Transformo tu visión en sitios web modernos, funcionales y personalizados. 
-        <br>¡Eleva tu presencia digital conmigo!</p>
-      <a href="#portfolio" class="btn btn-primary">Ver mi Portafolio</a>
+
+<!-- Hero Section -->
+<section class="tm-hero">
+  <div class="tm-hero-content">
+    <h1>GP | Web Developer</h1>
+    <p>Transformo tu visión en sitios web modernos, funcionales y personalizados. 
+      <br>¡Eleva tu presencia digital conmigo!</p>
+    
+    <!-- Botones lado a lado -->
+    <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+      <a href="#portfolio" class="btn btn-primary">Ver Portafolio</a>
+      <a href="#contact" class="btn btn-primary">Contáctame</a>
     </div>
-  </section>
+  </div>
+</section>
+
 
   <div class="container">
-
-
-  <!-- 2da Sección -->
+  <!-- 1ra Sección -->
   <section class="row tm-section tm-col-md-reverse">
     <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
-      <div style="display:flex; justify-content:center; align-items:center; height:100%; padding:2rem; text-align:center;">
+      <div style="display:flex; justify-content:center; align-items:center; block-size:100%; padding:2rem; text-align:center;">
         <div>
           <h2 class="tm-text-color-primary mb-4">Soluciones Web Personalizadas</h2>
           <p class="mb-4">Desarrollo sitios web a medida que potencian tu marca. Desde diseños modernos hasta funcionalidades avanzadas, te ayudo a destacar en el mundo digital.</p>
@@ -991,14 +1146,14 @@
   
     <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 p-0">
       <div class="tm-flex-center p-5 tm-bg-color-primary" style="text-align:center;">
-        <div style="max-width:400px; margin:0 auto;">
+        <div style="max-inline-size:400px; margin:0 auto;">
           <!-- Logo con animaciones -->
           <div style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
             <div class="tm-logo-glow"></div>
-            <img id="site-logo" src="img/logo.png" alt="Imagen" class="tm-logo-img rounded-circle mb-4" style="max-width:140px; height:auto;">
+            <img id="site-logo" src="img/logo.png" alt="Imagen" class="tm-logo-img rounded-circle mb-4" style="max-inline-size:140px; block-size:auto;">
             <div class="tm-logo-shine"></div>
           </div>
-          <p class="tm-text-color-white small tm-font-thin mb-0" style="margin-top:1rem;">
+          <p class="tm-text-color-white small tm-font-thin mb-0" style="margin-block-start:1rem;">
             Estoy comprometido en ofrecer soluciones digitales innovadoras que impulsen tu negocio.
           </p>
         </div>
@@ -1011,7 +1166,7 @@
   <!-- 3ra Sección -->
   <section class="row tm-section tm-mb-30 text-center">
     <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 p-0">
-      <img src="img/developer.jpg" alt="Imagen" class="img-fluid mx-auto d-block">
+      <img src="img/developer.jpg" alt="Developer" class="img-fluid img-levitate">
     </div>
     <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
       <div class="tm-flex-center p-5">
@@ -1067,11 +1222,12 @@
       </div>
     </section>
 
-    <!-- 5ta Sección - Portafolio -->
-    <section id="portfolio" class="row tm-section tm-mb-30">
+    <!-- 5ta Sección - Portafolio Mejorado -->
+    <section id="portfolio" class="tm-section tm-mb-30">
       <div class="col-12">
         <br>
         <h2 class="tm-text-color-primary text-center mb-4">Mi Portafolio</h2>
+        <p class="text-center mb-5" style="font-size: 1.1rem; color: var(--text-color); max-width: 600px; margin: 0 auto;">Descubre algunos de mis proyectos más recientes. Cada uno diseñado con atención al detalle y tecnología moderna.</p>
         <div class="tm-portfolio-grid">
           <div class="tm-portfolio-card">
             <div class="tm-portfolio-card-image">
@@ -1079,7 +1235,8 @@
             </div>
             <div class="tm-portfolio-card-content">
               <h3 class="tm-portfolio-card-title">Bar Cocteleria</h3>
-              <a href="https://bar1985.vercel.app/" target="_blank">Visitar sitio</a>
+              <p class="tm-portfolio-card-description">Sitio web elegante para un bar de coctelería, con reservas en línea y galería interactiva.</p>
+              <a href="https://bar1985.vercel.app/" target="_blank" class="btn-portfolio">Visitar sitio <i class="fas fa-external-link-alt ml-2"></i></a>
             </div>
           </div>
           <div class="tm-portfolio-card">
@@ -1090,7 +1247,8 @@
               <h3 class="tm-portfolio-card-title">
                 <span class="typing-effect">En Desarrollo...</span>
               </h3>
-              <a href="#" onclick="return false;">Próximamente</a>
+              <p class="tm-portfolio-card-description">Un proyecto emocionante en proceso. ¡Mantente atento para más detalles!</p>
+              <a href="#" class="btn-portfolio coming-soon">Próximamente <i class="fas fa-clock ml-2"></i></a>
             </div>
           </div>
           <div class="tm-portfolio-card">
@@ -1099,7 +1257,8 @@
             </div>
             <div class="tm-portfolio-card-content">
               <h3 class="tm-portfolio-card-title">Barber Studio</h3>
-              <a href="https://barber-shop-omega-two.vercel.app/" target="_blank">Visitar sitio</a>
+              <p class="tm-portfolio-card-description">Página moderna para barbería, con sistema de citas y portafolio de estilos.</p>
+              <a href="https://barber-shop-omega-two.vercel.app/" target="_blank" class="btn-portfolio">Visitar sitio <i class="fas fa-external-link-alt ml-2"></i></a>
             </div>
           </div>
           <div class="tm-portfolio-card">
@@ -1108,7 +1267,8 @@
             </div>
             <div class="tm-portfolio-card-content">
               <h3 class="tm-portfolio-card-title">Studio INK</h3>
-              <a href="https://studio-mauve-eight-58.vercel.app/" target="_blank">Visitar sitio</a>
+              <p class="tm-portfolio-card-description">Sitio para estudio de tatuajes, con galería dinámica y formulario de contacto.</p>
+              <a href="https://studio-mauve-eight-58.vercel.app/" target="_blank" class="btn-portfolio">Visitar sitio <i class="fas fa-external-link-alt ml-2"></i></a>
             </div>
           </div>
           <div class="tm-portfolio-card">
@@ -1117,7 +1277,8 @@
             </div>
             <div class="tm-portfolio-card-content">
               <h3 class="tm-portfolio-card-title">Cafeteria Lp</h3>
-              <a href="https://coffelp.vercel.app/" target="_blank">Visitar sitio</a>
+              <p class="tm-portfolio-card-description">Diseño acogedor para cafetería, incluyendo menú interactivo y mapa de ubicación.</p>
+              <a href="https://coffelp.vercel.app/" target="_blank" class="btn-portfolio">Visitar sitio <i class="fas fa-external-link-alt ml-2"></i></a>
             </div>
           </div>
           <div class="tm-portfolio-card">
@@ -1126,7 +1287,8 @@
             </div>
             <div class="tm-portfolio-card-content">
               <h3 class="tm-portfolio-card-title">Diseño y Decoración</h3>
-              <a href="https://design-coral-six.vercel.app/" target="_blank">Visitar sitio</a>
+              <p class="tm-portfolio-card-description">Plataforma para servicios de diseño interior, con portafolio visual y testimonios.</p>
+              <a href="https://design-coral-six.vercel.app/" target="_blank" class="btn-portfolio">Visitar sitio <i class="fas fa-external-link-alt ml-2"></i></a>
             </div>
           </div>
         </div>
@@ -1299,9 +1461,12 @@
       $('.whatsapp-float a').on('click', function() {
         // Puedes agregar un sonido aquí si quieres
       });
+
+      // Animación de aparición para cards al cargar
+      $('.tm-portfolio-card').each(function(index) {
+        $(this).css('opacity', '1');
+      });
     });
   </script>
 </body>
 </html>
-
-
