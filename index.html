@@ -2,16 +2,17 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>GPWebDev - Desarrollo Web</title>
-    <link rel="icon" type="image/png" href="img/favicon.ico">
-    <meta name="description" content="GP Web Developer - Transformamos tu visión en sitios web modernos, funcionales y personalizados. ¡Eleva tu presencia digital!">
+  <link rel="icon" type="image/png" href="img/favicon.ico">
+  <meta name="description" content="GP Web Developer - Transformamos tu visión en sitios web modernos, funcionales y personalizados. ¡Eleva tu presencia digital conmigo!">
   <!-- Cargar CSS -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/templatemo-style.css">
 
-  <!-- Inline CSS for portfolio-specific styles -->
+  <!-- CSS Completo -->
   <style>
   :root {
     --primary-color: #993333;
@@ -25,6 +26,10 @@
     --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 
+  * {
+    box-sizing: border-box;
+  }
+
   body {
     font-family: 'Open Sans', Helvetica, Arial, sans-serif;
     font-size: clamp(16px, 2.5vw, 18px);
@@ -36,6 +41,7 @@
     background-size: cover;
     line-height: 1.6;
     margin: 0;
+    overflow-x: hidden;
   }
 
   .tm-hero {
@@ -43,7 +49,7 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    min-block-size: 100vh; /* Altura completa de la ventana */
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -52,17 +58,16 @@
     overflow: visible !important;
     transform-style: preserve-3d;
     will-change: transform;
-    /* Parallax background effect */
     background-attachment: fixed;
   }
 
   .tm-hero::before {
     content: '';
     position: absolute;
-    inset-block-start: 0;
-    inset-inline-start: 0;
-    inline-size: 100%;
-    block-size: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background: linear-gradient(
       135deg,
       rgba(0, 0, 0, 0.7) 0%,
@@ -76,12 +81,13 @@
     position: relative;
     z-index: 2;
     color: var(--white);
-    max-inline-size: 800px;
+    max-width: 800px;
     padding: 2rem;
     animation: fadeInUp 1s ease-out;
     will-change: transform, opacity;
     backface-visibility: hidden;
     transform: translateZ(0);
+    width: 100%;
   }
 
   @keyframes fadeInUp {
@@ -98,16 +104,13 @@
   .tm-hero h1 {
     font-size: clamp(2.5rem, 6vw, 4.5rem);
     font-weight: 700;
-    margin-block-end: 1.5rem;
+    margin-bottom: 1.5rem;
     line-height: 1.2;
-    
-    /* Título en blanco con sombra mejorada para legibilidad */
     color: var(--white);
     text-shadow: 
       2px 2px 4px rgba(0, 0, 0, 0.8),
       0 0 20px rgba(0, 0, 0, 0.3),
       0 0 40px rgba(0, 0, 0, 0.2);
-    
     position: relative;
     overflow: hidden;
     will-change: transform, opacity;
@@ -118,11 +121,11 @@
   .tm-hero h1::after {
     content: '';
     position: absolute;
-    inset-block-end: -5px;
-    inset-inline-start: 50%;
+    bottom: -5px;
+    left: 50%;
     transform: translateX(-50%);
-    inline-size: 60px;
-    block-size: 3px;
+    width: 60px;
+    height: 3px;
     background: linear-gradient(90deg, 
       transparent 0%, 
       var(--secondary-color) 50%, 
@@ -132,28 +135,32 @@
 
   .tm-hero p {
     font-size: clamp(1.1rem, 2.5vw, 1.4rem);
-    margin-block-end: 2.5rem;
+    margin-bottom: 2.5rem;
     line-height: 1.6;
     opacity: 0.95;
-    
-    /* Fondo sutil para el párrafo */
     background: rgba(0, 0, 0, 0.4);
     padding: 1rem 1.5rem;
     border-radius: 15px;
-    border-inline-start: 4px solid var(--secondary-color);
+    border-left: 4px solid var(--secondary-color);
     display: inline-block;
-    max-inline-size: 600px;
-    margin-inline-start: auto;
-    margin-inline-end: auto;
-    
-    /* Sombra de texto para mejor legibilidad */
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
     will-change: transform, opacity;
     backface-visibility: hidden;
     transform: translateZ(0);
   }
 
-  /* Botón principal del hero mejorado */
+  /* Botones del hero mejorados para mobile */
+  .hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+
   .tm-hero .btn-primary {
     display: inline-block;
     background: linear-gradient(135deg, 
@@ -161,8 +168,8 @@
       var(--primary-hover) 100%);
     border: none;
     color: var(--white);
-    padding: 1rem 2.5rem;
-    font-size: clamp(1rem, 1.8vw, 1.2rem);
+    padding: clamp(0.8rem, 2vw, 1rem) clamp(1.5rem, 3vw, 2.5rem);
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -177,15 +184,18 @@
     will-change: transform, opacity;
     backface-visibility: hidden;
     transform: translateZ(0);
+    white-space: nowrap;
+    min-width: 140px;
+    text-align: center;
   }
 
   .tm-hero .btn-primary::before {
     content: '';
     position: absolute;
-    inset-block-start: 0;
-    inset-inline-start: -100%;
-    inline-size: 100%;
-    block-size: 100%;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
     background: linear-gradient(90deg, 
       transparent, 
       rgba(255, 255, 255, 0.2), 
@@ -194,7 +204,7 @@
   }
 
   .tm-hero .btn-primary:hover::before {
-    inset-inline-start: 100%;
+    left: 100%;
   }
 
   .tm-hero .btn-primary:hover {
@@ -211,10 +221,10 @@
   .tm-hero::after {
     content: '';
     position: absolute;
-    inset-block-start: 0;
-    inset-inline-start: 0;
-    inline-size: 100%;
-    block-size: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background-image: 
       radial-gradient(2px 2px at 20px 30px, rgba(255, 255, 255, 0.3), transparent),
       radial-gradient(2px 2px at 40px 70px, rgba(255, 255, 255, 0.2), transparent),
@@ -239,6 +249,7 @@
     padding: 4rem 0;
     position: relative;
     overflow: hidden;
+    scroll-margin-top: 80px;
   }
 
   #portfolio::before {
@@ -260,6 +271,8 @@
     padding: 2rem 0;
     position: relative;
     z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
   }
 
   /* Improved Portfolio Card */
@@ -269,13 +282,14 @@
     box-shadow: var(--shadow), 0 0 0 1px rgba(255, 255, 255, 0.1);
     overflow: hidden;
     transition: var(--transition);
-    max-inline-size: 360px;
+    max-width: 360px;
     margin: 0 auto;
     text-align: center;
     position: relative;
     animation: fadeInUp 0.6s ease-out forwards;
     opacity: 0;
     transform: translateY(20px);
+    width: 100%;
   }
 
   .tm-portfolio-card:nth-child(1) { animation-delay: 0.1s; }
@@ -291,8 +305,8 @@
   }
 
   .tm-portfolio-card-image {
-    inline-size: 100%;
-    block-size: 220px;
+    width: 100%;
+    height: 220px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -302,8 +316,8 @@
   }
 
   .tm-portfolio-card img {
-    inline-size: 100%;
-    block-size: 100%;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     object-position: center;
     display: block;
@@ -321,14 +335,14 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    min-block-size: 120px;
+    min-height: 120px;
   }
 
   .tm-portfolio-card-title {
     font-size: clamp(1.3rem, 2.2vw, 1.5rem);
-    margin-block-end: 0.8rem;
+    margin-bottom: 0.8rem;
     color: var(--primary-color);
-    inline-size: 100%;
+    width: 100%;
     text-align: center;
     font-weight: 600;
     position: relative;
@@ -348,7 +362,7 @@
   .tm-portfolio-card-description {
     font-size: 0.95rem;
     color: var(--text-color);
-    margin-block-end: 1.5rem;
+    margin-bottom: 1.5rem;
     line-height: 1.5;
     opacity: 0.8;
     max-width: 100%;
@@ -375,6 +389,7 @@
     overflow: hidden;
     border: none;
     cursor: pointer;
+    white-space: nowrap;
   }
 
   .tm-portfolio-card .btn-portfolio::before {
@@ -416,9 +431,9 @@
   .typing-effect {
     position: relative;
     display: inline-block;
-    min-block-size: 1.4rem;
+    min-height: 1.4rem;
     overflow: hidden;
-    border-inline-end: 2px solid var(--secondary-color);
+    border-right: 2px solid var(--secondary-color);
     white-space: nowrap;
     margin: 0 auto;
     text-align: center;
@@ -430,17 +445,17 @@
   .typing-effect::after {
     content: '';
     position: absolute;
-    inset-inline-end: -2px;
-    inset-block-start: 0;
-    inline-size: 2px;
-    block-size: 100%;
+    right: -2px;
+    top: 0;
+    width: 2px;
+    height: 100%;
     background-color: var(--secondary-color);
     animation: blink 0.75s infinite;
   }
 
   @keyframes typing {
-    from { inline-size: 0; }
-    to { inline-size: 100%; }
+    from { width: 0; }
+    to { width: 100%; }
   }
 
   @keyframes blink {
@@ -453,26 +468,29 @@
     50% { border-color: var(--secondary-color); }
   }
 
-  /* Other styles from previous CSS */
+  /* Container principal */
   .container {
-    margin-block-start: 2rem;
-    max-inline-size: 1200px;
-    margin-inline: auto;
-    padding-inline: 1rem;
+    margin-top: 2rem;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
   .tm-section {
     background-color: var(--white);
     border-radius: 8px;
     box-shadow: var(--shadow);
+    margin-bottom: 2rem;
   }
 
   .tm-flex-center {
     display: flex;
     align-items: center;
     justify-content: center;
-    inline-size: 100%;
-    min-block-size: 400px;
+    width: 100%;
+    min-height: 400px;
   }
 
   .btn {
@@ -484,6 +502,7 @@
     cursor: pointer;
     text-decoration: none;
     display: inline-block;
+    white-space: nowrap;
   }
 
   .btn-primary {
@@ -503,32 +522,25 @@
   .tm-text-color-white { color: var(--white); }
   .tm-text-color-gray { color: var(--text-color); }
   .tm-font-thin { font-weight: 300; }
-  .tm-max-w-400 { max-inline-size: 400px; }
+  .tm-max-w-400 { max-width: 400px; }
 
-  .tm-logo-img {
-    max-inline-size: 150px;
-    max-block-size: 150px;
-    inline-size: 100%;
-    block-size: auto;
-    object-fit: cover;
-    border-radius: 50%;
-  }
-
-  /* BOTÓN DE WHATSAPP CON EFECTOS AVANZADOS */
+  /* BOTÓN DE WHATSAPP MEJORADO Y MÁS COMPACTO */
   .whatsapp-float {
     position: fixed;
-    inset-block-end: 20px;
-    inset-inline-end: 20px;
+    bottom: 20px;
+    right: 20px;
     z-index: 1000;
     animation: float 3s ease-in-out infinite;
+    transition: all 0.3s ease;
   }
 
-  .whatsapp-float a {
+  /* Versión desktop - CÍRCULO CLÁSICO */
+  .whatsapp-float .whatsapp-desktop {
     display: flex;
     align-items: center;
     justify-content: center;
-    inline-size: 60px;
-    block-size: 60px;
+    width: 60px;
+    height: 60px;
     background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
     border-radius: 50%;
     box-shadow: 
@@ -542,13 +554,13 @@
     will-change: transform, box-shadow;
   }
 
-  .whatsapp-float a::before {
+  .whatsapp-float .whatsapp-desktop::before {
     content: '';
     position: absolute;
-    inset-block-start: 0;
-    inset-inline-start: -100%;
-    inline-size: 100%;
-    block-size: 100%;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
     background: linear-gradient(90deg, 
       transparent, 
       rgba(255, 255, 255, 0.2), 
@@ -556,11 +568,11 @@
     transition: left 0.6s;
   }
 
-  .whatsapp-float a:hover::before {
-    inset-inline-start: 100%;
+  .whatsapp-float .whatsapp-desktop:hover::before {
+    left: 100%;
   }
 
-  .whatsapp-float a:hover {
+  .whatsapp-float .whatsapp-desktop:hover {
     transform: scale(1.1) translateY(-3px) rotate(5deg);
     box-shadow: 
       0 8px 25px rgba(37, 211, 102, 0.5),
@@ -570,33 +582,136 @@
     animation: pulse 0.6s ease-in-out;
   }
 
-  .whatsapp-float a:active {
+  .whatsapp-float .whatsapp-desktop:active {
     transform: scale(0.95) translateY(0);
     transition: all 0.1s ease;
   }
 
-  .whatsapp-float img {
-    inline-size: 32px;
-    block-size: 32px;
+  .whatsapp-float .whatsapp-desktop img {
+    width: 32px;
+    height: 32px;
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
     transition: all 0.3s ease;
     z-index: 2;
     position: relative;
   }
 
-  .whatsapp-float a:hover img {
+  .whatsapp-float .whatsapp-desktop:hover img {
     transform: scale(1.1) rotate(10deg);
     filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+  }
+
+  /* Versión mobile - MÁS COMPACTA Y ELEGANTE */
+  .whatsapp-float .whatsapp-mobile {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    border-radius: 50%;
+    box-shadow: 
+      0 4px 12px rgba(37, 211, 102, 0.4),
+      0 8px 25px rgba(0, 0, 0, 0.2),
+      inset 0 2px 0 rgba(255, 255, 255, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    will-change: transform, box-shadow;
+  }
+
+  .whatsapp-float .whatsapp-mobile::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+      transparent, 
+      rgba(255, 255, 255, 0.2), 
+      transparent);
+    transition: left 0.6s;
+  }
+
+  .whatsapp-float .whatsapp-mobile:hover::before {
+    left: 100%;
+  }
+
+  .whatsapp-float .whatsapp-mobile:hover {
+    transform: scale(1.1) translateY(-3px);
+    box-shadow: 
+      0 8px 25px rgba(37, 211, 102, 0.5),
+      0 12px 40px rgba(0, 0, 0, 0.3),
+      inset 0 2px 0 rgba(255, 255, 255, 0.3);
+    background: linear-gradient(135deg, #20b358 0%, #0f9e5e 100%);
+    animation: pulse 0.6s ease-in-out;
+  }
+
+  .whatsapp-float .whatsapp-mobile:active {
+    transform: scale(0.95) translateY(0);
+    transition: all 0.1s ease;
+  }
+
+  .whatsapp-float .whatsapp-mobile img {
+    width: 28px;
+    height: 28px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    transition: all 0.3s ease;
+    z-index: 2;
+  }
+
+  .whatsapp-float .whatsapp-mobile:hover img {
+    transform: scale(1.1) rotate(360deg);
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+  }
+
+  /* Tooltip mejorado */
+  .whatsapp-float .whatsapp-tooltip {
+    position: absolute;
+    bottom: 75px;
+    right: 0;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    z-index: 1001;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    font-weight: 500;
+  }
+
+  .whatsapp-float .whatsapp-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    right: 20px;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-top-color: rgba(0, 0, 0, 0.9);
+  }
+
+  .whatsapp-float .whatsapp-desktop:hover .whatsapp-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
   }
 
   /* Efecto de onda al hacer clic */
   .whatsapp-float a::after {
     content: '';
     position: absolute;
-    inset-block-start: 50%;
-    inset-inline-start: 50%;
-    inline-size: 0;
-    block-size: 0;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.3);
     transform: translate(-50%, -50%);
@@ -604,14 +719,14 @@
   }
 
   .whatsapp-float a:active::after {
-    inline-size: 100px;
-    block-size: 100px;
+    width: 120px;
+    height: 120px;
   }
 
   /* Animación de flotación */
   @keyframes float {
     0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
+    50% { transform: translateY(-8px); }
   }
 
   /* Animación de pulso al hover */
@@ -630,60 +745,46 @@
       inset 0 2px 0 rgba(255, 255, 255, 0.3); }
   }
 
-  /* Efecto de burbujas de chat */
-  .whatsapp-float a::before {
-    /* Ya definido arriba para el efecto de brillo */
-  }
-
-  .whatsapp-float a:hover::after {
-    /* Ya definido para el efecto de onda */
-  }
-
-  /* Centered form title */
+  /* Formulario mejorado */
   .tm-form-header {
     text-align: center;
-    margin-block-end: 2rem;
+    margin-bottom: 2rem;
   }
 
   .tm-form-header h2 {
     margin: 0;
     font-size: clamp(1.8rem, 3vw, 2.2rem);
     font-weight: 600;
-
-    /* Título del formulario visible sobre fondo transparente */
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0), rgba(248, 249, 250, 0));
     color: #ffffff;
     padding: 0.5rem 2rem;
     border-radius: 8px;
     display: inline-block;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0);
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
   }
 
-  /* Formulario con background transparente */
   .tm-form-section {
     background: transparent !important;
     box-shadow: none !important;
     margin: 0 !important;
+    padding: 2rem 1rem;
   }
 
-  /* Labels del formulario en blanco */
   .tm-form-section label {
     color: #ffffff !important;
     font-weight: 500;
-    margin-block-end: 0.5rem;
+    margin-bottom: 0.5rem;
     display: block;
   }
 
-  /* Inputs del formulario */
   .tm-form-section .form-control {
     background-color: rgba(0, 0, 0, 0.6);
     border: 1px solid #ffffffa2;
     color: #ffffff !important;
     padding: 0.75rem;
     border-radius: 4px;
-    margin-block-end: 1rem;
-    inline-size: 100%;
+    margin-bottom: 1rem;
+    width: 100%;
+    font-size: 16px;
   }
 
   .tm-form-section .form-control::placeholder {
@@ -698,17 +799,22 @@
     outline: none;
   }
 
-  /* Selects del formulario */
   .tm-form-section select {
     background-color: rgba(0, 0, 0, 0.6);
     border: 1px solid rgb(255, 255, 255);
     color: #ffffff !important;
     padding: 0.75rem;
     border-radius: 4px;
-    margin-block-end: 1rem;
-    inline-size: 100%;
-    font-size: inherit;
+    margin-bottom: 1rem;
+    width: 100%;
+    font-size: 16px;
     cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 16 16'%3e%3cpath d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+    padding-right: 2.5rem;
   }
 
   .tm-form-section select option {
@@ -725,45 +831,19 @@
     box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.2);
   }
 
-
-
-
-
-  
-  /* Para navegadores específicos */
-  .tm-form-section select::-ms-expand {
-    color: #ffffff;
-    background-color: rgba(0, 0, 0, 0.6);
-  }
-
-  .tm-form-section select::-webkit-scrollbar {
-    inline-size: 8px;
-  }
-
-  .tm-form-section select::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.3);
-  }
-
-  .tm-form-section select::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 4px;
-  }
-
-  /* Botón del formulario - ACHICADO */
   .tm-form-section .btn {
-      background: var(--primary-color);
-      border-color: var(--primary-color);
-      color: var(--white);
-      padding: 0.5rem 1.5rem;
-      border-radius: 4px;
-      font-size: 0.9rem;
-      transition: var(--transition);
-      cursor: pointer;
-      inline-size: auto; /* ya no ocupa todo el ancho */
-      margin-block-start: 1rem;
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--white);
+    padding: clamp(0.6rem, 1.5vw, 0.75rem) clamp(1.5rem, 3vw, 2rem);
+    border-radius: 4px;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    transition: var(--transition);
+    cursor: pointer;
+    width: auto;
+    margin-top: 1rem;
+    white-space: nowrap;
   }
-
-
 
   .tm-form-section .btn:hover {
     background: var(--primary-hover);
@@ -772,25 +852,25 @@
     transform: translateY(-2px);
   }
 
-  /* Footer con efecto de superposición */
+  /* Footer mejorado */
   .tm-footer-section {
     background-color: var(--primary-color) !important;
     color: var(--white);
     padding: 2rem 0;
-    margin-block-start: -2rem; /* Lo sube más arriba */
+    margin-top: -2rem;
     position: relative;
     z-index: 2;
-    border-start-start-radius: 8px;
-    border-start-end-radius: 8px;
-    margin-block-end: 2rem;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    margin-bottom: 2rem;
   }
 
   .tm-footer-info-box {
-    margin-block-end: 1rem;
+    margin-bottom: 1rem;
   }
 
   .tm-footer-info-box h4 {
-    margin-block-end: 1rem;
+    margin-bottom: 1rem;
     color: var(--white);
   }
 
@@ -821,17 +901,20 @@
     gap: 10px;
     text-decoration: none;
     color: var(--white);
+    padding: 0.5rem 0;
   }
 
   .tm-social-links img {
-    inline-size: 28px;
-    block-size: 28px;
+    width: 28px;
+    height: 28px;
     border-radius: 6px;
   }
 
-  /* Copyright in white */
   .tm-copyright-text {
     color: var(--white) !important;
+    text-align: center;
+    padding: 1rem;
+    margin: 0;
   }
 
   .tm-copyright-text a {
@@ -843,176 +926,13 @@
     text-decoration: underline;
   }
 
-  @media (max-inline-size: 600px) {
-    .tm-portfolio-grid {
-      grid-template-columns: 1fr;
-      gap: 15px;
-    }
-
-    .tm-portfolio-card {
-      max-inline-size: 100%;
-      margin: 0;
-    }
-
-    .whatsapp-float {
-      inset-block-end: 15px;
-      inset-inline-end: 15px;
-      animation-duration: 2.5s;
-    }
-
-    .whatsapp-float a {
-      inline-size: 50px;
-      block-size: 50px;
-    }
-
-    .whatsapp-float img {
-      inline-size: 28px;
-      block-size: 28px;
-    }
-
-    .tm-footer-section {
-      margin-block-start: -1rem;
-      padding: 1.5rem 0;
-    }
-
-    .tm-form-header h2 {
-      padding: 0.4rem 1.5rem;
-      font-size: clamp(1.5rem, 4vw, 1.8rem);
-    }
-
-    .tm-form-section .form-control,
-    .tm-form-section select {
-      font-size: 16px; /* Evita zoom en iOS */
-    }
-
-    .tm-hero {
-      min-block-size: 100vh;
-      padding: 1rem;
-      background-attachment: scroll; /* Desactiva parallax en mobile */
-    }
-
-    .tm-hero h1 {
-      font-size: clamp(2rem, 8vw, 3rem);
-      padding: 0.8rem 1.5rem;
-    }
-
-    .tm-hero p {
-      font-size: clamp(1rem, 4vw, 1.2rem);
-      padding: 0.8rem 1rem;
-    }
-
-    .tm-hero .btn-primary {
-      padding: 0.8rem 2rem;
-      font-size: clamp(0.9rem, 2vw, 1rem);
-    }
-
-    /* Botón del formulario más pequeño en móvil */
-    .tm-form-section .btn {
-      padding: 0.4rem 1.2rem;
-      font-size: 0.85rem;
-    }
-
-    /* Ajustes para secciones en móvil */
-    .tm-flex-center {
-      min-block-size: auto;
-      padding: 2rem 1rem;
-    }
-
-    .tm-section .row {
-      margin: 0 -1rem;
-    }
-
-    .tm-section [class*="col-"] {
-      padding: 0 1rem;
-      margin-block-end: 2rem;
-    }
-
-    /* Ajuste para la 4ta sección en móvil */
-    .tm-section.tm-mb-30.flex {
-      display: block;
-    }
-
-    .tm-section.tm-mb-30.flex [class*="col-"] {
-      inline-size: 100%;
-      text-align: center;
-    }
-
-    .tm-section.tm-mb-30.flex img {
-      max-inline-size: 100%;
-      block-size: auto;
-      margin-block-start: 1rem;
-    }
-
-    /* Ajuste para listas en móvil */
-    ul.space-y-3 {
-      padding-inline-start: 0;
-    }
-
-    ul.space-y-3 li {
-      margin-block-end: 0.5rem;
-    }
-
-    /* Ajuste del efecto de escritura en móvil */
-    .typing-effect {
-      font-size: clamp(1rem, 2.5vw, 1.2rem);
-    }
-
-    #portfolio {
-      padding: 2rem 0;
-    }
-
-    .tm-portfolio-grid {
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
-      padding: 1rem 0;
-    }
-
-    .tm-portfolio-card-image {
-      block-size: 200px;
-    }
-  }
-
-  /* Mejora adicional para pantallas medianas */
-  @media (min-inline-size: 601px) and (max-inline-size: 768px) {
-    .tm-portfolio-grid {
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .tm-hero h1 {
-      font-size: clamp(2.2rem, 5vw, 3.5rem);
-    }
-    
-    .tm-hero p {
-      font-size: clamp(1.1rem, 2.2vw, 1.3rem);
-    }
-
-    .tm-flex-center {
-      min-block-size: 300px;
-    }
-  }
-
-  @media (min-inline-size: 769px) and (max-inline-size: 992px) {
-    .tm-portfolio-grid {
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    }
-
-    .container {
-      max-inline-size: 100%;
-      padding-inline: 2rem;
-    }
-  }
-
-  /* Smooth scroll para navegación interna */
-    html {
-      scroll-behavior: smooth;
-    }
-
-  /* ==== EFECTO LEVITACIÓN ==== */
+  /* EFECTO LEVITACIÓN */
   .img-levitate {
     display: inline-block;
     animation: levitate 3s ease-in-out infinite;
     transition: transform 0.3s ease;
+    max-width: 100%;
+    height: auto;
   }
 
   @keyframes levitate {
@@ -1027,6 +947,804 @@
     }
   }
 
+  /* ========== SECCIONES MEJORADAS ========== */
+
+  /* Sección de Servicios */
+  .tm-services-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    margin-bottom: 3rem;
+  }
+
+  .tm-services-section .section-content {
+    display: flex;
+    align-items: center;
+    min-height: 400px;
+    padding: 3rem;
+  }
+
+  .tm-services-section .content-inner {
+    max-width: 100%;
+  }
+
+  .tm-services-section .section-title {
+    font-size: clamp(1.8rem, 3vw, 2.2rem);
+    font-weight: 700;
+    color: var(--primary-color);
+    position: relative;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+  }
+
+  .tm-services-section .section-title .icon-left {
+    margin-right: 0.75rem;
+    color: var(--secondary-color);
+    font-size: 1.2em;
+  }
+
+  .tm-services-section .section-description {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--text-color);
+    margin-bottom: 2rem;
+  }
+
+  .tm-services-section .section-features {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .tm-services-section .feature-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background: rgba(153, 51, 51, 0.05);
+    border-radius: 8px;
+    border-left: 3px solid var(--primary-color);
+  }
+
+  .tm-services-section .feature-icon {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    width: 24px;
+  }
+
+  .tm-services-section .feature-text {
+    font-weight: 500;
+    color: var(--text-color);
+  }
+
+  /* Sección de Diseño */
+  .tm-design-section {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    margin-bottom: 3rem;
+    position: relative;
+  }
+
+  .tm-design-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  }
+
+  .tm-design-section .image-wrapper {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    min-height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tm-design-section .section-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .tm-design-section .section-image:hover {
+    transform: scale(1.05);
+  }
+
+  .tm-design-section .image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(153, 51, 51, 0.8), rgba(0, 210, 210, 0.6));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .tm-design-section .image-wrapper:hover .image-overlay {
+    opacity: 1;
+  }
+
+  .tm-design-section .overlay-content {
+    text-align: center;
+    color: white;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+  }
+
+  .tm-design-section .image-wrapper:hover .overlay-content {
+    transform: translateY(0);
+  }
+
+  .tm-design-section .overlay-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+  }
+
+  .tm-design-section .overlay-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  }
+
+  .tm-design-section .section-content {
+    padding: 4rem 3rem;
+    display: flex;
+    align-items: center;
+    min-height: 450px;
+  }
+
+  .tm-design-section .section-title {
+    font-size: clamp(1.8rem, 3vw, 2.2rem);
+    font-weight: 700;
+    color: var(--text-color);
+    position: relative;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+  }
+
+  .tm-design-section .section-title .icon-left {
+    margin-right: 0.75rem;
+    color: var(--primary-color);
+    font-size: 1.2em;
+  }
+
+  .tm-design-section .section-description {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--text-color);
+    margin-bottom: 2rem;
+  }
+
+  .tm-design-section .tech-stack {
+    text-align: left;
+  }
+
+  .tm-design-section .stack-title {
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+
+  .tm-design-section .tech-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .tm-design-section .tech-badge {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(153, 51, 51, 0.3);
+    transition: all 0.3s ease;
+  }
+
+  .tm-design-section .tech-badge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(153, 51, 51, 0.4);
+  }
+
+  .tm-design-section .btn-outline-light {
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: var(--text-color);
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    background: transparent;
+  }
+
+  .tm-design-section .btn-outline-light:hover {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(153, 51, 51, 0.3);
+  }
+
+  /* Sección de Servicios Completos */
+  .tm-services-complete-section {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    margin-bottom: 3rem;
+  }
+
+  .tm-services-complete-section .image-main-wrapper {
+    position: relative;
+    height: 100%;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .tm-services-complete-section .main-image {
+    width: 100%;
+    height: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .tm-services-complete-section .main-image:hover {
+    transform: scale(1.02);
+  }
+
+  .tm-services-complete-section .content-detailed {
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .tm-services-complete-section .content-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .tm-services-complete-section .section-title {
+    font-size: clamp(1.8rem, 3vw, 2.3rem);
+    font-weight: 700;
+    color: var(--primary-color);
+    position: relative;
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+
+  .tm-services-complete-section .section-title .icon-left {
+    margin-right: 0.75rem;
+    color: var(--secondary-color);
+    font-size: 1.2em;
+  }
+
+  .tm-services-complete-section .section-subtitle {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-color);
+  }
+
+  .tm-services-complete-section .highlight {
+    color: #8b5cf6;
+    font-weight: 600;
+  }
+
+  /* Grid de servicios */
+  .tm-services-complete-section .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .tm-services-complete-section .service-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .tm-services-complete-section .service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    border-color: var(--primary-color);
+  }
+
+  .tm-services-complete-section .service-icon-wrapper {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    box-shadow: 0 4px 15px rgba(153, 51, 51, 0.3);
+  }
+
+  .tm-services-complete-section .service-icon {
+    font-size: 1.5rem;
+    color: white;
+  }
+
+  .tm-services-complete-section .service-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+  }
+
+  .tm-services-complete-section .service-description {
+    font-size: 0.9rem;
+    color: #6b7280;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* Beneficios */
+  .tm-services-complete-section .benefits-section {
+    background: rgba(153, 51, 51, 0.05);
+    padding: 2rem;
+    border-radius: 12px;
+    border-left: 4px solid var(--primary-color);
+  }
+
+  .tm-services-complete-section .benefits-title {
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+
+  .tm-services-complete-section .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .tm-services-complete-section .benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+  }
+
+  .tm-services-complete-section .benefit-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .tm-services-complete-section .benefit-icon {
+    color: var(--secondary-color);
+    font-size: 1.1rem;
+    width: 24px;
+  }
+
+  .tm-services-complete-section .benefit-text {
+    font-weight: 500;
+    color: var(--text-color);
+    font-size: 0.95rem;
+  }
+
+  /* CTA Section MEJORADA */
+  .tm-services-complete-section .cta-section {
+    text-align: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+    border-radius: 12px;
+    margin-top: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tm-services-complete-section .cta-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+      transparent, 
+      rgba(255, 255, 255, 0.1), 
+      transparent);
+    transition: left 0.6s;
+  }
+
+  .tm-services-complete-section .cta-section:hover::before {
+    left: 100%;
+  }
+
+  .tm-services-complete-section .cta-text {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .tm-services-complete-section .cta-button {
+    background: white;
+    color: var(--primary-color);
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    z-index: 2;
+    text-decoration: none;
+  }
+
+  .tm-services-complete-section .cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+      transparent, 
+      rgba(153, 51, 51, 0.2), 
+      transparent);
+    transition: left 0.6s;
+  }
+
+  .tm-services-complete-section .cta-button:hover::before {
+    left: 100%;
+  }
+
+  .tm-services-complete-section .cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+    background: #f8f9fa;
+    color: var(--primary-color);
+  }
+
+  .tm-services-complete-section .cta-button.cta-hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3) !important;
+  }
+
+  /* Animaciones */
+  @keyframes glow {
+    from { opacity: 0.6; transform: scale(1); }
+    to { opacity: 1; transform: scale(1.1); }
+  }
+
+  @keyframes shine {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    100% { transform: translateX(100px) translateY(100px) rotate(45deg); }
+  }
+
+  @keyframes pulse-badge {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+
+  /* Efecto de highlight para secciones destino */
+  .scroll-target-highlight {
+    animation: highlight-section 2s ease-out;
+  }
+
+  @keyframes highlight-section {
+    0% {
+      background-color: rgba(153, 51, 51, 0.1);
+      transform: scale(1);
+    }
+    50% {
+      background-color: rgba(153, 51, 51, 0.2);
+      transform: scale(1.02);
+    }
+    100% {
+      background-color: transparent;
+      transform: scale(1);
+    }
+  }
+
+  /* RESPONSIVE - Mobile First */
+  @media (max-width: 480px) {
+    .container {
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
+    }
+
+    .tm-hero {
+      min-height: 100vh;
+      padding: 1rem;
+      background-attachment: scroll;
+    }
+
+    .tm-hero-content {
+      padding: 1rem;
+    }
+
+    .tm-hero h1 {
+      font-size: clamp(1.8rem, 8vw, 2.8rem);
+      margin-bottom: 1rem;
+      padding: 0.5rem;
+    }
+
+    .tm-hero p {
+      font-size: clamp(1rem, 4vw, 1.2rem);
+      padding: 0.75rem 1rem;
+      margin-bottom: 2rem;
+      line-height: 1.5;
+    }
+
+    .hero-buttons {
+      gap: 0.75rem;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .tm-hero .btn-primary {
+      width: 100%;
+      max-width: 250px;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+    }
+
+    .tm-flex-center {
+      min-height: auto;
+      padding: 2rem 1rem;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .tm-section .row {
+      margin: 0 -0.75rem;
+    }
+
+    .tm-section [class*="col-"] {
+      padding: 0 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    /* Secciones mejoradas - Mobile */
+    .tm-design-section .section-content,
+    .tm-services-complete-section .content-detailed {
+      padding: 2rem 1.5rem;
+    }
+    
+    .tm-services-complete-section .services-grid,
+    .tm-services-complete-section .benefits-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .tm-design-section .tech-badges {
+      justify-content: center;
+    }
+    
+    .tm-services-complete-section .cta-section {
+      padding: 1.5rem;
+    }
+
+    /* Portfolio Mobile */
+    #portfolio {
+      padding: 2rem 0.5rem;
+    }
+
+    .tm-portfolio-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      padding: 1rem 0;
+      max-width: 100%;
+    }
+
+    .tm-portfolio-card {
+      max-width: 100%;
+      margin: 0;
+    }
+
+    .tm-portfolio-card-image {
+      height: 200px;
+    }
+
+    .tm-portfolio-card-content {
+      padding: 1.5rem;
+    }
+
+    .tm-portfolio-card .btn-portfolio {
+      padding: 0.75rem 1.5rem;
+      font-size: 0.95rem;
+      width: 100%;
+      justify-content: center;
+    }
+
+    /* Formulario Mobile */
+    .tm-form-section {
+      padding: 1.5rem 0.75rem;
+    }
+
+    .tm-form-header h2 {
+      font-size: clamp(1.5rem, 5vw, 1.8rem);
+      padding: 0.5rem 1rem;
+    }
+
+    .tm-form-section .form-control,
+    .tm-form-section select {
+      font-size: 16px;
+      padding: 0.75rem;
+    }
+
+    .tm-form-section .row {
+      margin: 0 -0.5rem;
+    }
+
+    .tm-form-section [class*="col-"] {
+      padding: 0 0.5rem;
+    }
+
+    .tm-form-section .col-md-6 {
+      margin-bottom: 1rem;
+    }
+
+    .tm-form-section .btn {
+      width: 100%;
+      max-width: 200px;
+      padding: 0.75rem 1.5rem;
+    }
+
+    /* Footer Mobile */
+    .tm-footer-section {
+      margin-top: -1rem;
+      padding: 1.5rem 0.75rem;
+    }
+
+    .tm-footer-section .row {
+      margin: 0 -0.75rem;
+    }
+
+    .tm-footer-section [class*="col-"] {
+      padding: 0 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tm-social-links {
+      gap: 10px;
+    }
+
+    .tm-social-links a {
+      padding: 0.75rem 0;
+      font-size: 0.95rem;
+    }
+
+    /* WhatsApp Mobile - MÁS COMPACTO */
+    .whatsapp-float {
+      bottom: 15px;
+      right: 15px;
+    }
+
+    .whatsapp-float .whatsapp-desktop {
+      display: none;
+    }
+
+    .whatsapp-float .whatsapp-mobile {
+      display: flex;
+      width: 56px;
+      height: 56px;
+    }
+
+    .whatsapp-float .whatsapp-mobile img {
+      width: 26px;
+      height: 26px;
+    }
+
+    .whatsapp-float .whatsapp-tooltip {
+      display: none;
+    }
+  }
+
+  @media (min-width: 481px) and (max-width: 768px) {
+    .tm-portfolio-grid {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .tm-hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+    }
+    
+    .tm-hero p {
+      font-size: clamp(1.1rem, 2.2vw, 1.3rem);
+    }
+
+    .hero-buttons {
+      gap: 1rem;
+    }
+
+    .tm-flex-center {
+      min-height: 300px;
+    }
+
+    /* WhatsApp Tablet */
+    .whatsapp-float .whatsapp-mobile {
+      display: none;
+    }
+
+    .whatsapp-float .whatsapp-desktop {
+      display: flex;
+      width: 55px;
+      height: 55px;
+    }
+
+    .whatsapp-float .whatsapp-desktop img {
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  @media (min-width: 769px) {
+    .container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+
+    .tm-portfolio-grid {
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+  }
+
+  /* Smooth scroll */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Fix para iOS Safari */
+  @supports (-webkit-touch-callout: none) {
+    .tm-hero {
+      background-attachment: scroll;
+    }
+  }
+
+  /* Animación de vibración para mobile */
+  @keyframes vibrate {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-2px); }
+    75% { transform: translateX(2px); }
+  }
+
+  .whatsapp-float a.vibrate {
+    animation: vibrate 0.1s ease-in-out;
+  }
   </style>
 
   <script>
@@ -1037,25 +1755,21 @@
     }
   </script>
 
-  <!-- jQuery COMPLETO para el efecto parallax (ANTES del slim) -->
+  <!-- jQuery COMPLETO para el efecto parallax -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   
-  <!-- Script del Parallax -->
+  <!-- Script del Parallax mejorado -->
   <script type="text/javascript">
   (function() {
     $(document).ready(function() {
       console.log("Parallax inicializando...");
       
-      /* Globals */
       var $window = $(window),
           $body = $('body'),
-          scrollIntervalID = 0,
           windowHeight = 0,
           scrollTop = 0,
-          scrollY = 0,
           parallaxSpeed = 0.5;
 
-      /* Inicialización */
       var initParallax = function() {
         console.log("Iniciando parallax...");
         windowHeight = $window.height();
@@ -1063,43 +1777,39 @@
         updateParallax();
       };
 
-      /* Función principal del parallax */
       var updateParallax = function() {
         scrollTop = $window.scrollTop();
-        scrollY = scrollTop * parallaxSpeed;
-        
-        // Aplicar transformación al fondo del hero
-        $('.tm-hero').css({
-          'background-position-y': scrollY + 'px'
-        });
-
-        // Aplicar transformaciones a los elementos del contenido
+        var scrollY = scrollTop * parallaxSpeed;
         var parallaxAmount = scrollTop * 0.3;
         
-        $('.tm-hero h1').css({
-          'transform': 'translateY(' + (-parallaxAmount * 0.8) + 'px)',
-          'opacity': 1 - (scrollTop / windowHeight * 0.2)
-        });
+        // Solo aplicar parallax en desktop
+        if ($(window).width() > 768) {
+          $('.tm-hero').css({
+            'background-position-y': scrollY + 'px'
+          });
 
-        $('.tm-hero p').css({
-          'transform': 'translateY(' + (-parallaxAmount * 0.6) + 'px)',
-          'opacity': 1 - (scrollTop / windowHeight * 0.1)
-        });
+          $('.tm-hero h1').css({
+            'transform': 'translateY(' + (-parallaxAmount * 0.8) + 'px)',
+            'opacity': Math.max(0.8, 1 - (scrollTop / windowHeight * 0.2))
+          });
 
-        $('.tm-hero .btn-primary').css({
-          'transform': 'translateY(' + (-parallaxAmount * 0.4) + 'px)',
-          'opacity': 1 - (scrollTop / windowHeight * 0.05)
-        });
+          $('.tm-hero p').css({
+            'transform': 'translateY(' + (-parallaxAmount * 0.6) + 'px)',
+            'opacity': Math.max(0.9, 1 - (scrollTop / windowHeight * 0.1))
+          });
 
-        $('.tm-hero-content').css({
-          'transform': 'translateY(' + (-parallaxAmount * 0.2) + 'px) scale(' + (1 + (scrollTop / windowHeight * 0.05)) + ')'
-        });
+          $('.tm-hero .btn-primary').css({
+            'transform': 'translateY(' + (-parallaxAmount * 0.4) + 'px)',
+            'opacity': Math.max(0.95, 1 - (scrollTop / windowHeight * 0.05))
+          });
+
+          $('.tm-hero-content').css({
+            'transform': 'translateY(' + (-parallaxAmount * 0.2) + 'px) scale(' + (1 + (scrollTop / windowHeight * 0.05)) + ')'
+          });
+        }
       };
 
-      /* Inicializar cuando el DOM esté listo */
       initParallax();
-      
-      // Debug - puedes quitar esto después
       console.log("Parallax configurado correctamente");
     });
   }).call(this);
@@ -1115,114 +1825,141 @@
     <div class="loader-section section-right"></div>
   </div>
 
-
-<!-- Hero Section -->
-<section class="tm-hero">
-  <div class="tm-hero-content">
-    <h1>GP | Web Developer</h1>
-    <p>Transformo tu visión en sitios web modernos, funcionales y personalizados. 
-      <br>¡Eleva tu presencia digital conmigo!</p>
-    
-    <!-- Botones lado a lado -->
-    <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-      <a href="#portfolio" class="btn btn-primary">Ver Portafolio</a>
-      <a href="#contact" class="btn btn-primary">Contáctame</a>
+  <!-- Hero Section -->
+  <section class="tm-hero">
+    <div class="tm-hero-content">
+      <h1>GP | Web Developer</h1>
+      <p>Transformo tu visión en sitios web modernos, funcionales y personalizados. 
+        <br>¡Eleva tu presencia digital!</p>
+      
+      <!-- Botones lado a lado mejorados -->
+      <div class="hero-buttons">
+        <a href="#portfolio" class="btn btn-primary">Ver Portafolio</a>
+        <a href="#contact" class="btn btn-primary">Contáctame</a>
+      </div>
     </div>
-  </div>
-</section>
-
+  </section>
 
   <div class="container">
-  <!-- 1ra Sección -->
-  <section class="row tm-section tm-col-md-reverse">
-    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
-      <div style="display:flex; justify-content:center; align-items:center; block-size:100%; padding:2rem; text-align:center;">
-        <div>
-          <h2 class="tm-text-color-primary mb-4">Soluciones Web Personalizadas</h2>
-          <p class="mb-4">Desarrollo sitios web a medida que potencian tu marca. Desde diseños modernos hasta funcionalidades avanzadas, te ayudo a destacar en el mundo digital.</p>
-        </div>
-      </div>
-    </div>
-  
-    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 p-0">
-      <div class="tm-flex-center p-5 tm-bg-color-primary" style="text-align:center;">
-        <div style="max-inline-size:400px; margin:0 auto;">
-          <!-- Logo con animaciones -->
-          <div style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
-            <div class="tm-logo-glow"></div>
-            <img id="site-logo" src="img/logo.png" alt="Imagen" class="tm-logo-img rounded-circle mb-4" style="max-inline-size:140px; block-size:auto;">
-            <div class="tm-logo-shine"></div>
+    <!-- ========== SECCIÓN 1: SOLUCIONES DIGITALES COMPLETAS ========== -->
+    <section class="row tm-section tm-services-complete-section">
+      <div class="col-12">
+        <div class="content-detailed">
+          
+          <!-- Header -->
+          <div class="content-header mb-4 text-center">
+            <h2 class="section-title tm-text-color-primary">
+              <i class="fas fa-cogs icon-left"></i>
+              Soluciones Digitales Completas
+            </h2>
+            <p class="section-subtitle">
+              Transformo tus ideas en sitios web a medida que 
+              <span class="highlight">destacan tu marca</span> y 
+              <span class="highlight">conectan con tus clientes</span>.
+            </p>
           </div>
-          <p class="tm-text-color-white small tm-font-thin mb-0" style="margin-block-start:1rem;">
-            Estoy comprometido en ofrecer soluciones digitales innovadoras que impulsen tu negocio.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-  <br>
 
-    
-  <!-- 3ra Sección -->
-  <section class="row tm-section tm-mb-30 text-center">
-    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 p-0">
-      <img src="img/developer.jpg" alt="Developer" class="img-fluid img-levitate">
-    </div>
-    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
-      <div class="tm-flex-center p-5">
-        <div class="tm-flex-center tm-flex-col text-center">
-          <h2>Diseño y Desarrollo Web</h2>
-          <p>
-            Ofrezco servicios completos de diseño y desarrollo web. 
-            Cuéntame tu idea y la haré realidad.  
-            Sígueme en 
-            <a href="https://www.instagram.com/gian_pasquinelli/" target="_blank">Instagram</a> 
-            para más información.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
+          <!-- Servicios -->
+          <div class="services-grid text-center">
+            <div class="service-card">
+              <div class="service-icon-wrapper"><i class="fas fa-user service-icon"></i></div>
+              <h4 class="service-title">Portfolios Personales</h4>
+              <p class="service-description">Muestra tu trabajo de forma profesional y atractiva.</p>
+            </div>
+            <div class="service-card">
+              <div class="service-icon-wrapper"><i class="fas fa-building service-icon"></i></div>
+              <h4 class="service-title">Sitios Corporativos</h4>
+              <p class="service-description">Presencia digital sólida para tu empresa.</p>
+            </div>
+            <div class="service-card">
+              <div class="service-icon-wrapper"><i class="fas fa-shopping-cart service-icon"></i></div>
+              <h4 class="service-title">Tiendas en Línea</h4>
+              <p class="service-description">E-commerce completo y optimizado para ventas.</p>
+            </div>
+            <div class="service-card">
+              <div class="service-icon-wrapper"><i class="fas fa-bullhorn service-icon"></i></div>
+              <h4 class="service-title">Landing Pages</h4>
+              <p class="service-description">Páginas de alto impacto para conversiones.</p>
+            </div>
+          </div>
 
-    <!-- 4ta Sección -->
-    <section class="row tm-section tm-mb-30 flex flex-wrap items-center">
-      <!-- Columna de texto -->
-      <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8">
-        <div class="tm-flex-center pl-5 pr-5 pt-5 pb-5">
-          <div class="tm-md-flex-center">
-            <h2 class="mb-6 tm-text-color-primary text-3xl font-bold">Soluciones Digitales Completas</h2>
-            <p class="mb-4 text-lg">Transformo tus ideas en sitios web a medida que <span class="text-purple-500 font-semibold">destacan tu marca</span> y <span class="text-purple-500 font-semibold">conectan con tus clientes</span>. Ofrezco:</p>
-            <ul class="mb-4 space-y-3">
-              <li class="flex items-center">
-                <i class="fas fa-user text-green-500 mr-3"></i>
-                <span class="text-green-500 font-semibold underline decoration-green-300 decoration-2">Portfolios personales</span>
-              </li>
-              <li class="flex items-center">
-                <i class="fas fa-building text-green-500 mr-3"></i>
-                <span class="text-green-500 font-semibold underline decoration-green-300 decoration-2">Sitios corporativos</span>
-              </li>
-              <li class="flex items-center">
-                <i class="fas fa-shopping-cart text-green-500 mr-3"></i>
-                <span class="text-green-500 font-semibold underline decoration-green-300 decoration-2">Tiendas en línea</span>
-              </li>
-              <li class="flex items-center">
-                <i class="fas fa-bullhorn text-green-500 mr-3"></i>
-                <span class="text-green-500 font-semibold underline decoration-green-300 decoration-2">Landing pages</span>
-              </li>
-            </ul>
-            <p class="mb-4 text-lg">Mis sitios son <span class="text-blue-500 font-semibold">100% responsivos</span>, optimizados para <span class="text-blue-500 font-semibold">SEO</span> y con <span class="text-blue-500 font-semibold">mantenimiento continuo</span>.</p>
-            <p class="mb-4 text-lg">Cada proyecto es una oportunidad para <span class="text-red-500 font-semibold">innovar</span>, <span class="text-red-500 font-semibold">destacar</span> y <span class="text-red-500 font-semibold">crecer</span>.</p>
-            <a href="https://www.instagram.com/gian_pasquinelli/" class="btn btn-primary mt-3" target="_blank">Conoce más</a>
+          <!-- Beneficios -->
+          <div class="benefits-section mt-5">
+            <h4 class="benefits-title mb-4 text-center">¿Por qué elegir mis servicios?</h4>
+            <div class="benefits-grid text-center">
+              <div class="benefit-item"><i class="fas fa-mobile-alt benefit-icon"></i><span class="benefit-text">100% <strong>Responsivo</strong></span></div>
+              <div class="benefit-item"><i class="fas fa-search benefit-icon"></i><span class="benefit-text"><strong>Optimizado</strong> para SEO</span></div>
+              <div class="benefit-item"><i class="fas fa-tools benefit-icon"></i><span class="benefit-text"><strong>Mantenimiento</strong> continuo</span></div>
+              <div class="benefit-item"><i class="fas fa-bolt benefit-icon"></i><span class="benefit-text"><strong>Innovación</strong> constante</span></div>
+            </div>
+          </div>
+
+          
+          <!-- CTA MEJORADA -->
+          <div class="cta-section mt-5 text-center">
+            <p class="cta-text mb-3">
+              Cada proyecto es una oportunidad para <span class="highlight">innovar</span>, 
+              <span class="highlight">destacar</span> y <span class="highlight">crecer</span>.
+            </p>
+            <a href="https://wa.me/5493471417071" target="_blank" class="btn btn-primary cta-button">
+              <i class="fas fa-briefcase mr-2"></i>
+              Listo/a para comenzar tu proyecto?
+            </a>
           </div>
         </div>
+      </div>  
+    </section>
+
+    <!-- ========== SECCIÓN 2: SOBRE MÍ ========== -->
+    <section class="row tm-section tm-design-section text-center">
+      <div class="col-lg-6 col-xl-6 p-0">
+        <div class="image-wrapper">
+          <img src="img/developer.jpg" alt="Sobre mí" class="section-image img-levitate">
+          <div class="image-overlay">
+            <div class="overlay-content">
+              <i class="fas fa-user overlay-icon"></i>
+              <h3 class="overlay-title"></h3>
+            </div>
+          </div>
+        </div>
       </div>
-      <!-- Columna de imagen -->
-      <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 flex justify-center items-center">
-        <img src="img/3D1.png" alt="Imagen" class="rounded-lg shadow-lg hover:scale-105 transition-transform duration-500 max-w-full h-auto animate-float">
+      
+      <div class="col-lg-6 col-xl-6">
+        <div class="section-content text-center text-lg-start">
+          <div class="content-inner">
+            <h2 class="section-title mb-4">
+              <i class="fas fa-id-card icon-left"></i>
+              Sobre Mí
+            </h2>
+            <p class="section-description">
+              Soy <strong>Gianluca Pasquinelli</strong>, desarrollador web enfocado en crear experiencias digitales que marquen la diferencia.  
+              Mi objetivo es combinar diseño atractivo con tecnología funcional para ayudar a marcas, negocios y personas a crecer en el mundo digital.
+            </p>
+
+            <!-- Valores personales -->
+            <div class="values-list mt-4">
+              <h4 class="stack-title mb-3">Mis valores:</h4>
+              <ul class="list-unstyled">
+                <li><i class="fas fa-bullseye text-success me-2"></i> Compromiso con cada proyecto</li>
+                <li><i class="fas fa-lightbulb text-warning me-2"></i> Creatividad e innovación constante</li>
+                <li><i class="fas fa-handshake text-primary me-2"></i> Comunicación clara y cercana</li>
+                <li><i class="fas fa-heart text-danger me-2"></i> Pasión por el desarrollo web</li>
+              </ul>
+            </div>
+
+            <!-- Botón social -->
+            <div class="social-link mt-4">
+              <a href="https://www.instagram.com/gian_pasquinelli/" target="_blank" class="btn btn-outline-light">
+                <i class="fab fa-instagram mr-2"></i>
+                Conoce más de mi día a día
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- 5ta Sección - Portafolio Mejorado -->
+    <!-- 3ra Sección - Portafolio -->
     <section id="portfolio" class="tm-section tm-mb-30">
       <div class="col-12">
         <br>
@@ -1235,7 +1972,7 @@
             </div>
             <div class="tm-portfolio-card-content">
               <h3 class="tm-portfolio-card-title">Bar Cocteleria</h3>
-              <p class="tm-portfolio-card-description">Sitio web para un bar de coctelería, con reservas y carta interactiva.</p>
+              <p class="tm-portfolio-card-description">Sitio web para un bar de coctelería, con reservas en línea y carta interactiva.</p>
               <a href="https://bar1985.vercel.app/" target="_blank" class="btn-portfolio">Visitar sitio <i class="fas fa-external-link-alt ml-2"></i></a>
             </div>
           </div>
@@ -1267,7 +2004,7 @@
             </div>
             <div class="tm-portfolio-card-content">
               <h3 class="tm-portfolio-card-title">Studio INK</h3>
-              <p class="tm-portfolio-card-description">Sitio para estudio de tatuajes, con galería dinámica y formulario de contacto.</p>
+              <p class="tm-portfolio-card-description">Sitio para estudio de tatuajes, con galería y formulario de contacto.</p>
               <a href="https://studio-mauve-eight-58.vercel.app/" target="_blank" class="btn-portfolio">Visitar sitio <i class="fas fa-external-link-alt ml-2"></i></a>
             </div>
           </div>
@@ -1287,7 +2024,7 @@
             </div>
             <div class="tm-portfolio-card-content">
               <h3 class="tm-portfolio-card-title">Diseño y Decoración</h3>
-              <p class="tm-portfolio-card-description">Web para servicios de diseño interior, con portafolio visual y testimonios.</p>
+              <p class="tm-portfolio-card-description">Sitio para servicios de diseño interior, con portafolio visual y testimonios.</p>
               <a href="https://design-coral-six.vercel.app/" target="_blank" class="btn-portfolio">Visitar sitio <i class="fas fa-external-link-alt ml-2"></i></a>
             </div>
           </div>
@@ -1295,8 +2032,8 @@
       </div>
     </section>
 
-    <!-- 6ta Sección - Formulario de Contacto (transparente) -->
-    <section class="row tm-form-section">
+    <!-- 4ta Sección - Formulario de Contacto -->
+    <section id="contact" class="row tm-form-section">
       <div class="col-lg-12 tm-form-header">
         <h2 class="tm-container-inner">Formulario de Contacto</h2>
       </div>
@@ -1340,7 +2077,7 @@
       </div>
     </section>
 
-    <!-- Footer (superpuesto y más arriba) -->
+    <!-- Footer -->
     <section class="row tm-footer-section">
       <div class="container">
         <div class="row tm-container-inner">
@@ -1379,21 +2116,35 @@
       </div>
     </section>
 
-    <!-- WhatsApp Floating Button CON EFECTOS -->
-    <div class="whatsapp-float">
-      <a href="https://wa.me/5493471417071?text=Hola%20GP%20WebDev,%20quiero%20consultar%20sobre%20mis%20servicios%20de%20desarrollo%20web" target="_blank" title="¡Hablemos por WhatsApp!">
-        <img src="img/botonwpp.png" alt="WhatsApp" />
-      </a>
-    </div>
-
-    <!-- Pie de página -->
+    <!-- Copyright -->
     <div class="row">
       <div class="col-lg-12">
-        <p class="text-center small tm-copyright-text mb-0"> &copy; Copyright <span class="tm-current-year"></span> | <a href="https://www.instagram.com/gian_pasquinelli/" class="tm-text-color-blank" target="_blank">Gianluca Pasquinelli</a></p>      </div>
+        <p class="tm-copyright-text mb-0"> &copy; Copyright <span class="tm-current-year"></span> | <a href="https://www.instagram.com/gian_pasquinelli/" class="tm-text-color-blank" target="_blank">Gianluca Pasquinelli</a></p>
+      </div>
     </div>
   </div>
 
-  <!-- jQuery SLIM (después del jQuery completo para no interferir) -->
+  <!-- WhatsApp Floating Button MEJORADO Y COMPACTO -->
+  <div class="whatsapp-float">
+    <!-- Versión Desktop -->
+    <a href="https://wa.me/5493471417071?text=Hola%20GP%20WebDev,%20quiero%20consultar%20sobre%20mis%20servicios%20de%20desarrollo%20web" 
+       target="_blank" 
+       class="whatsapp-desktop"
+       title="¡Hablemos por WhatsApp!">
+      <img src="img/botonwpp.png" alt="WhatsApp" />
+      <div class="whatsapp-tooltip">¡Chatea conmigo!</div>
+    </a>
+    
+    <!-- Versión Mobile COMPACTA -->
+    <a href="https://wa.me/5493471417071?text=Hola%20GP%20WebDev,%20quiero%20consultar%20sobre%20mis%20servicios%20de%20desarrollo%20web" 
+       target="_blank" 
+       class="whatsapp-mobile"
+       title="¡Hablemos por WhatsApp!">
+      <img src="img/botonwpp.png" alt="WhatsApp" />
+    </a>
+  </div>
+
+  <!-- jQuery SLIM -->
   <script src="js/jquery-3.2.1.slim.min.js"></script>
   <script>
     $(function(){
@@ -1404,72 +2155,145 @@
     });
   </script>
 
-  <!-- Script simplificado para el efecto de escritura SOLO en "En Desarrollo..." -->
+  <!-- Scripts adicionales COMPLETOS -->
   <script>
-    $(document).ready(function() {
-      // Función para reiniciar el efecto de tipeo
-      function restartTypingEffect() {
-        const typingElement = $('.typing-effect');
+  $(document).ready(function() {
+    // Función para reiniciar el efecto de tipeo
+    function restartTypingEffect() {
+      const typingElement = $('.typing-effect');
+      typingElement.css({
+        'width': '0',
+        'overflow': 'hidden',
+        'border-right': '2px solid var(--secondary-color)',
+        'white-space': 'nowrap',
+        'animation': 'none'
+      });
+      
+      setTimeout(() => {
         typingElement.css({
-          'width': '0',
-          'overflow': 'hidden',
-          'border-right': '2px solid var(--secondary-color)',
-          'white-space': 'nowrap',
           'animation': 'typing 2.5s steps(15, end), blink-caret 0.75s step-end infinite'
         });
-        
-        // Reiniciar la animación CSS
-        typingElement[0].style.animation = 'none';
-        setTimeout(() => {
-          typingElement[0].style.animation = 'typing 2.5s steps(15, end), blink-caret 0.75s step-end infinite';
-        }, 10);
+      }, 10);
+    }
+
+    // Reiniciar animación cuando se hace scroll al portafolio
+    let isVisible = false;
+    $(window).on('scroll', function() {
+      const portfolioTop = $('#portfolio').offset().top;
+      const scrollTop = $(this).scrollTop();
+      const windowHeight = $(this).height();
+      
+      if (scrollTop + windowHeight > portfolioTop && !isVisible) {
+        isVisible = true;
+        setTimeout(restartTypingEffect, 200);
       }
-
-      // Reiniciar animación cuando se hace scroll al portafolio
-      let isVisible = false;
-      $(window).on('scroll', function() {
-        const portfolioTop = $('#portfolio').offset().top;
-        const scrollTop = $(this).scrollTop();
-        const windowHeight = $(this).height();
-        
-        if (scrollTop + windowHeight > portfolioTop && !isVisible) {
-          isVisible = true;
-          // Reiniciar después de 200ms
-          setTimeout(restartTypingEffect, 200);
-        }
-      });
-
-      // Efecto de hover para reiniciar animación
-      $('.tm-portfolio-card:nth-child(2)').hover(
-        function() {
-          restartTypingEffect();
-        },
-        function() {
-          // No hacer nada en mouseleave
-        }
-      );
-
-      // Ocultar el cursor parpadeante después de completar la animación
-      setTimeout(() => {
-        $('.typing-effect').css({
-          'border-right': 'none',
-          'animation': 'none'
-        });
-      }, 3000);
-
-      // Efecto adicional para el botón de WhatsApp - sonido opcional
-      $('.whatsapp-float a').on('click', function() {
-        // Puedes agregar un sonido aquí si quieres
-      });
-
-      // Animación de aparición para cards al cargar
-      $('.tm-portfolio-card').each(function(index) {
-        $(this).css('opacity', '1');
-      });
     });
+
+    // Efecto de hover para reiniciar animación
+    $('.tm-portfolio-card:nth-child(2)').hover(
+      function() {
+        restartTypingEffect();
+      },
+      function() {
+        // No hacer nada en mouseleave
+      }
+    );
+
+    // Ocultar el cursor parpadeante después de completar la animación
+    setTimeout(() => {
+      $('.typing-effect').css({
+        'border-right': 'none',
+        'animation': 'none'
+      });
+    }, 3000);
+
+    // Smooth scroll MEJORADO para anclas
+    $('a[href^="#"]').on('click', function(event) {
+      // Prevenir el comportamiento por defecto
+      event.preventDefault();
+      
+      // Obtener el href del enlace
+      var targetId = $(this).attr('href');
+      
+      // Verificar si existe el elemento objetivo
+      var $target = $(targetId);
+      if ($target.length) {
+        // Calcular la posición de destino con offset mejorado
+        var targetPosition = $target.offset().top;
+        
+        // Ajustar para fixed headers (si los hay) - 80px de margen superior
+        var scrollOffset = -80;
+        
+        // Animación de scroll suave
+        $('html, body').stop().animate({
+          scrollTop: targetPosition + scrollOffset
+        }, {
+          duration: 1200, // Duración en milisegundos
+          easing: 'swing', // Tipo de easing
+          step: function(now, fx) {
+            // Mantener el scroll suave durante la animación
+            if (fx.prop === 'scrollTop') {
+              window.scrollTo(0, now);
+            }
+          },
+          complete: function() {
+            // Opcional: activar el hash en la URL después del scroll
+            if (history.pushState) {
+              history.pushState(null, null, targetId);
+            }
+            
+            // Efecto visual adicional - destacar la sección destino
+            $target.addClass('scroll-target-highlight');
+            setTimeout(function() {
+              $target.removeClass('scroll-target-highlight');
+            }, 2000);
+          }
+        });
+      }
+    });
+
+    // Animación de aparición para cards
+    $('.tm-portfolio-card').each(function(index) {
+      $(this).css('opacity', '1');
+    });
+
+    // Detectar cambio de tamaño para alternar versiones del WhatsApp
+    function updateWhatsAppButton() {
+      if ($(window).width() <= 480) {
+        $('.whatsapp-desktop').hide();
+        $('.whatsapp-mobile').show();
+      } else {
+        $('.whatsapp-desktop').show();
+        $('.whatsapp-mobile').hide();
+      }
+    }
+
+    // Inicializar
+    updateWhatsAppButton();
+    
+    // Actualizar en resize
+    $(window).on('resize', function() {
+      updateWhatsAppButton();
+    });
+
+    // Efecto de vibración al tocar el botón WhatsApp en mobile
+    $('.whatsapp-float a').on('click touchstart', function() {
+      $(this).addClass('vibrate');
+      setTimeout(() => {
+        $(this).removeClass('vibrate');
+      }, 100);
+    });
+
+    // Efecto hover mejorado para el botón CTA del portafolio
+    $('.cta-button[href="#portfolio"]').hover(
+      function() {
+        $(this).addClass('cta-hover');
+      },
+      function() {
+        $(this).removeClass('cta-hover');
+      }
+    );
+  });
   </script>
 </body>
 </html>
-
-
-
